@@ -5,12 +5,42 @@ import Image from "astro/components/Image.astro";
 ---
 
 <div class="flex items-center">
-    <a class="flex items-center mx-2" href="https://github.com/alexgornovoi" target="_blank">
-        <Image src={Github} width="18" alt="Github Logo" class="mr-1" />
-        GitHub
+    <a
+        class="flex items-center mx-1 group"
+        href="https://github.com/alexgornovoi"
+        target="_blank"
+    >
+        <Image
+            src={Linkedin}
+            width="18"
+            alt="Github Logo"
+            class="mr-1 group-hover:cursor-pointer"
+        />
+        <span class="relative">
+            <span
+                class="relative before:absolute before:left-1/2 before:bottom-0 before:w-0 before:h-[2px] before:bg-off-white before:transition-all before:duration-200 before:ease-in-out group-hover:before:w-full group-hover:before:left-0"
+            >
+                GitHub
+            </span>
+        </span>
     </a>
-    <a class="flex items-center mx-1" href="https://www.linkedin.com/in/alexeygornovoi/" target="_blank">
-        <Image src={Linkedin} width="18" alt="Linkedin Logo" class="mr-1" />
-        LinkedIn
+    <a
+        class="flex items-center mx-1 group"
+        href="https://www.linkedin.com/in/alexeygornovoi/"
+        target="_blank"
+    >
+        <Image
+            src={Linkedin}
+            width="18"
+            alt="Linkedin Logo"
+            class="mr-1 group-hover:cursor-pointer"
+        />
+        <span class="relative">
+            <span
+                class="relative before:absolute before:left-1/2 before:bottom-0 before:w-0 before:h-[2px] before:bg-off-white before:transition-all before:duration-200 before:ease-in-out group-hover:before:w-full group-hover:before:left-0"
+            >
+                LinkedIn
+            </span>
+        </span>
     </a>
 </div>
