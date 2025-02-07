@@ -5,12 +5,12 @@ import Image from "astro/components/Image.astro";
 ---
 
 <div class="flex items-center">
-    <button class="flex items-center mx-2">
-        <Image src={Github} width="18" alt="Github Logo" />
-        <p class="ml-1">GitHub</p>
-    </button>
-    <button class="flex items-center mx-1">
-        <Image src={Linkedin} width="18" alt="Linkedin Logo" />
-        <p class="ml-1">LinkedIn</p>
-    </button>
+    <a class="flex items-center mx-2" href="https://github.com/alexgornovoi" target="_blank">
+        <Image src={Github} width="18" alt="Github Logo" class="mr-1" />
+        GitHub
+    </a>
+    <a class="flex items-center mx-1" href="https://www.linkedin.com/in/alexeygornovoi/" target="_blank">
+        <Image src={Linkedin} width="18" alt="Linkedin Logo" class="mr-1" />
+        LinkedIn
+    </a>
 </div>
