@@ -2,45 +2,39 @@
 import Github from "../../public/github.svg";
 import Linkedin from "../../public/linkedin.svg";
 import Image from "astro/components/Image.astro";
+
+const socialLinks = [
+    {
+        url: "https://github.com/alexgornovoi",
+        image: Github,
+        alt: "Github Logo",
+        label: "GitHub",
+    },
+    {
+        url: "https://www.linkedin.com/in/alexeygornovoi/",
+        image: Linkedin,
+        alt: "Linkedin Logo",
+        label: "LinkedIn",
+    },
+];
 ---
 
 <div class="flex items-center">
-    <a
-        class="flex items-center mx-1 group"
-        href="https://github.com/alexgornovoi"
-        target="_blank"
-    >
-        <Image
-            src={Linkedin}
-            width="18"
-            alt="Github Logo"
-            class="mr-1 group-hover:cursor-pointer"
-        />
-        <span class="relative">
-            <span
-                class="relative before:absolute before:left-1/2 before:bottom-0 before:w-0 before:h-[2px] before:bg-off-white before:transition-all before:duration-200 before:ease-in-out group-hover:before:w-full group-hover:before:left-0"
-            >
-                GitHub
-            </span>
-        </span>
-    </a>
-    <a
-        class="flex items-center mx-1 group"
-        href="https://www.linkedin.com/in/alexeygornovoi/"
-        target="_blank"
-    >
-        <Image
-            src={Linkedin}
-            width="18"
-            alt="Linkedin Logo"
-            class="mr-1 group-hover:cursor-pointer"
-        />
-        <span class="relative">
-            <span
-                class="relative before:absolute before:left-1/2 before:bottom-0 before:w-0 before:h-[2px] before:bg-off-white before:transition-all before:duration-200 before:ease-in-out group-hover:before:w-full group-hover:before:left-0"
-            >
-                LinkedIn
-            </span>
-        </span>
-    </a>
+    {
+        socialLinks.map(({ url, image, alt, label }) => (
+            <a class="flex items-center mx-1 group" href={url} target="_blank">
+                <Image
+                    src={image}
+                    width="18"
+                    alt={alt}
+                    class="mr-1 group-hover:cursor-pointer"
+                />
+                <span class="relative">
+                    <span class="relative before:absolute before:left-1/2 before:bottom-0 before:w-0 before:h-[2px] before:bg-off-white before:transition-all before:duration-200 before:ease-in-out group-hover:before:w-full group-hover:before:left-0">
+                        {label}
+                    </span>
+                </span>
+            </a>
+        ))
+    }
 </div>
