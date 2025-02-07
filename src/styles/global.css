@@ -2,11 +2,21 @@
 
 
 @theme {
-    --color-night: #121212;
+    --color-night: #010105;
+    --color-foreground: #101014;
     --color-off-white: #f2fdef;
     --font-sans: "Arial", sans-serif;
 }
 
+
 body{
-    @apply bg-night text-off-white font-sans;
+    @apply bg-night text-off-white font-sans h-screen flex flex-col items-center;
+}
+
+content{
+    @apply flex justify-center align-middle h-full;
+}
+
+main{
+    @apply mt-[calc(50px+1.25rem)] w-3xl
 }

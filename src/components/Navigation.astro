@@ -1,0 +1,17 @@
+---
+const links = [
+    ["About", "/"],
+    ["Projects", "/projects"],
+    ["Blog", "/blog"],
+];
+---
+
+<div>
+    {
+        links.map((link) => (
+            <button class="m-1.5">
+                <a href={link[1]}>{link[0]}</a>
+            </button>
+        ))
+    }
+</div>

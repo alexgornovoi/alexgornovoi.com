@@ -1,0 +1,16 @@
+---
+import Github from "../../public/github.svg";
+import Linkedin from "../../public/linkedin.svg";
+import Image from "astro/components/Image.astro";
+---
+
+<div class="flex items-center">
+    <button class="flex items-center mx-2">
+        <Image src={Github} width="18" alt="Github Logo" />
+        <p class="ml-1">GitHub</p>
+    </button>
+    <button class="flex items-center mx-1">
+        <Image src={Linkedin} width="18" alt="Linkedin Logo" />
+        <p class="ml-1">LinkedIn</p>
+    </button>
+</div>
