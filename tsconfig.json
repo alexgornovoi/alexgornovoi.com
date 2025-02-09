@@ -4,7 +4,12 @@
   "exclude": ["dist"],
   "compilerOptions": {
     "allowJs": true,
-    "strictNullChecks": false
+    "strictNullChecks": false,
+    "baseUrl": ".",
+    "paths": {
+      "@components/*": ["src/components/*"],
+      "@assets/*": ["src/assets/*"]
+    }
   }
 
 }

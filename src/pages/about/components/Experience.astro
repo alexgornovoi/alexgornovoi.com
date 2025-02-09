@@ -1,13 +1,81 @@
 ---
+import { Image } from "astro:assets";
 import "../../../styles/global.css";
-import experience from "./_experience.json";
+import Cigna from "@assets/experience/cigna.png";
+
+const experience = [
+    {
+        logo: Cigna,
+        name: "The Cigna Group",
+        time: "May, 2023 - Present",
+        positions: [
+            {
+                title: "Application Developer Intern",
+                time: "May, 2023 - Auguest, 2023",
+                description: "",
+            },
+            {
+                title: "Site Reliability Engineer",
+                time: "July, 2023 - Present",
+                description:
+                    "Worked on a Python Package for automating Gremlin chaos tests. Worked with teams to create virtual services. Assisted teams with FMEA",
+            },
+        ],
+    },
+];
 ---
 
 {
     experience.map(({ logo, name, time, positions }) => (
-        <div class="content flex-1">
-            <div class="flex "></div>
-            <p>{name}</p>
+        <div class="content flex-1 p-5">
+            <div class="flex  items-center">
+                <div class="w-20 h-20 flex items-center bg-off-white mr-5 rounded-lg">
+                    <Image alt={name} src={logo} class="w-50" />
+                </div>
+                <div class="flex flex-col">
+                    <p class="text-2xl font-bold">{name}</p>
+                    <p class="text-sm">{time}</p>
+                </div>
+            </div>
+            <div class="flex flex-col-reverse">
+                {positions.map(({ title, time, description }, index) => (
+                    <div>
+                        <hr class="my-4 mx-3 h-0.5 border-t-0 dark:bg-off-white/10" />
+                        <div class="flex flex-col text-justify">
+                            <p class="text-xl font-bold">{title}</p>
+                            <p class="text-sm my-1">{time}</p>
+                            <p>{description}</p>
+                        </div>
+                    </div>
+                ))}
+            </div>
         </div>
     ))
 }
+
+<!-- Template {
+    "logo": ,
+    "name": "",
+    "time": [
+        "",
+        ""
+    ],
+    "positions": [
+        {
+            "title": "",
+            "time": [
+                "",
+                ""
+            ],
+            "description": ""
+        },
+        {
+            "title": "",
+            "time": [
+                "",
+                ""
+            ],
+            "description": ""
+        }
+    ]
+} -->
