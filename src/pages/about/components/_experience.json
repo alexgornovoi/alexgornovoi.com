@@ -1,0 +1,28 @@
+[
+    {
+        "logo": "cigna.png",
+        "name": "The Cigna Group",
+        "time": [
+            "May, 2023",
+            "Present"
+        ],
+        "positions": [
+            {
+                "title": "Application Developer Intern",
+                "time": [
+                    "May, 2023",
+                    "Auguest, 2023"
+                ],
+                "description": ""
+            },
+            {
+                "title": "Site Reliability Engineer",
+                "time": [
+                    "July, 2023",
+                    "Present"
+                ],
+                "description": "Worked on a Python Package for automating Gremlin chaos tests. Worked with teams to create virtual services. Assisted teams with FMEA"
+            }
+        ]
+    }
+]

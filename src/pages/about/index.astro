@@ -1,20 +1,75 @@
 ---
+import ClientRouter from "astro/components/ClientRouter.astro";
 import "../../styles/global.css";
 import Header from "../../components/Header.astro";
+import Experience from "./components/Experience.astro";
+import Education from "./components/Education.astro";
 ---
 
 <html>
 	<head>
 		<meta charset="utf-8" />
+		<ClientRouter />
 	</head>
 	<body>
 		<Header />
 		<main>
-			<content>
-				<div class="content">
-					<p class="font-bold text-2xl">Alex Gornovoi</p>
+			<div class="flex w-full" id="tabs">
+				<button
+					class="content justify-center text-center glow-effect glow-effect-active m-2"
+					data-tab="experience"
+				>
+					<p>Experience</p>
+				</button>
+				<button
+					class="content justify-center text-center glow-effect m-2"
+					data-tab="education"
+				>
+					<p class="p-2">Education</p>
+				</button>
+			</div>
+			<!-- Tab Content  -->
+			<div class="flex justify-center w-full mt-4">
+				<div id="experience-content" class="flex-1 m-2 mt-4">
+					<Experience />
 				</div>
-			</content>
+				<div id="education-content" class="flex-1 hidden m-2 mt-4">
+					<Education />
+				</div>
+			</div>
 		</main>
 	</body>
 </html>
+
+<script>
+	document.addEventListener("astro:page-load", function () {
+		const buttons =
+			document.querySelectorAll<HTMLButtonElement>("#tabs button");
+		const experienceContent =
+			document.getElementById("experience-content")!;
+		const educationContent = document.getElementById("education-content")!;
+
+		buttons.forEach((button) => {
+			button.addEventListener(
+				"click",
+				function (this: HTMLButtonElement) {
+					const tab = this.getAttribute("data-tab");
+
+					if (tab === "experience") {
+						experienceContent.classList.remove("hidden");
+						educationContent.classList.add("hidden");
+					} else if (tab === "education") {
+						educationContent.classList.remove("hidden");
+						experienceContent.classList.add("hidden");
+					}
+
+					// Toggle active button styles
+					buttons.forEach((btn) =>
+						btn.classList.remove("glow-effect-active"),
+					);
+					this.classList.add("glow-effect-active");
+				},
+			);
+		});
+	});
+</script>

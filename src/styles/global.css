@@ -9,15 +9,26 @@
 }
 
 
-body{
+body {
     @apply bg-night text-off-white font-sans h-screen flex flex-col items-center;
 }
 
-.content{
-    @apply bg-foreground w-full rounded-xl p-5;
+.content {
+    @apply bg-foreground w-full rounded-xl;
 }
 
 main {
-    @apply mt-[calc(50px+1.25rem)] w-full max-w-5xl px-4 sm:px-6 md:px-8;
+    @apply mt-[calc(50px+1.25rem)] w-full max-w-5xl;
 }
 
+.glow-effect {
+    @apply border-2 border-transparent transition-all duration-300 ease-in-out;
+}
+
+.glow-effect:hover {
+    @apply shadow-lg shadow-white/30;
+}
+
+.glow-effect-active {
+    @apply shadow-lg shadow-white/50;
+}
