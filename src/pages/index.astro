@@ -3,77 +3,101 @@ import "../styles/global.css";
 import Header from "../components/Header.astro";
 import ClientRouter from "astro/components/ClientRouter.astro";
 
-// Data object with dynamic content
 const info = {
-  currentRole: "Site Reliability Engineer",
-  currentCompany: "The Cigna Group",
-  education: "Graduated from UMass Amherst with a degree in Computer Science and Computational Mathematics.",
-  recentProject: "Working on alexgornovoi.com, read more info here (WIP).",
-  interests: "Interested in Artificial Intelligence and Quantitative Finance.",
-  latestBlog: "Working on [Project Name], which aims to [Project Goal]. Excited to see where this goes!",
-  contact: {
-    email: "alex.gornovoi@gmail.com",
-    linkedin: "https://www.linkedin.com/in/alexeygornovoi/"
-  }
+	currentRole: "Site Reliability Engineer",
+	currentCompany: "The Cigna Group",
+	education:
+		"Graduated from UMass Amherst with a degree in Computer Science and Computational Mathematics.",
+	recentProject: "Working on alexgornovoi.com, read more info here (WIP).",
+	interests:
+		"Interested in Artificial Intelligence and Quantitative Finance.",
+	latestBlog:
+		"Working on [Project Name], which aims to [Project Goal]. Excited to see where this goes!",
 };
 ---
 
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <ClientRouter />
-  </head>
-  <body>
-    <Header />
-    <main class="flex flex-col items-center justify-center h-full py-10">
-      <div class="w-full max-w-3xl p-5">
-        <!-- Current Job and Education Section -->
-        <div class="flex justify-between gap-5 mb-5">
-          <div class="content flex-1 p-5 opacity-0 animate-fade-in-down" style="animation-delay: 100ms">
-            <h3 class="text-xl font-semibold">Current Role</h3>
-            <p class="mt-2">
-              Working as a <span class="font-bold italic">{info.currentRole}</span> at {info.currentCompany}
-            </p>
-          </div>
+	<head>
+		<meta charset="utf-8" />
+		<ClientRouter />
+	</head>
+	<body>
+		<Header />
+		<main class="flex flex-col items-center justify-center h-full py-10">
+			<div class="w-full max-w-3xl p-5">
+				<!-- Current Job and Education Section -->
+				<div class="flex justify-between gap-5 mb-5">
+					<div
+						class="content flex-1 p-5 opacity-0 animate-fade-in-down"
+						style="animation-delay: 100ms"
+					>
+						<h3 class="text-xl font-semibold">Current Role</h3>
+						<p class="mt-2">
+							Working as a <span class="font-bold italic"
+								>{info.currentRole}</span
+							> at {info.currentCompany}
+						</p>
+					</div>
 
-          <div class="content flex-1 p-5 opacity-0 animate-fade-in-down" style="animation-delay: 150ms">
-            <h3 class="text-xl font-semibold">Education</h3>
-            <p class="mt-2">{info.education}</p>
-          </div>
-        </div>
+					<div
+						class="content flex-1 p-5 opacity-0 animate-fade-in-down"
+						style="animation-delay: 150ms"
+					>
+						<h3 class="text-xl font-semibold">Education</h3>
+						<p class="mt-2">{info.education}</p>
+					</div>
+				</div>
 
-        <!-- Recent Project and Interests Section -->
-        <div class="flex justify-between gap-5 mb-5">
-          <div class="content flex-1 p-5 opacity-0 animate-fade-in-down" style="animation-delay: 200ms">
-            <h3 class="text-xl font-semibold">Recent Project</h3>
-            <p class="mt-2">{info.recentProject}</p>
-          </div>
+				<!-- Recent Project and Interests Section -->
+				<div class="flex justify-between gap-5 mb-5">
+					<div
+						class="content flex-1 p-5 opacity-0 animate-fade-in-down"
+						style="animation-delay: 200ms"
+					>
+						<h3 class="text-xl font-semibold">Recent Project</h3>
+						<p class="mt-2">{info.recentProject}</p>
+					</div>
 
-          <div class="content flex-1 p-5 opacity-0 animate-fade-in-down" style="animation-delay: 250ms">
-            <h3 class="text-xl font-semibold">Interests</h3>
-            <p class="mt-2">{info.interests}</p>
-          </div>
-        </div>
+					<div
+						class="content flex-1 p-5 opacity-0 animate-fade-in-down"
+						style="animation-delay: 250ms"
+					>
+						<h3 class="text-xl font-semibold">Interests</h3>
+						<p class="mt-2">{info.interests}</p>
+					</div>
+				</div>
 
-        <!-- Latest Blog Section -->
-        <div class="content flex-1 p-5 opacity-0 mb-5 animate-fade-in-down" style="animation-delay: 300ms">
-          <h3 class="text-xl font-semibold">Latest Blog</h3>
-          <div>
-			WIP
-		  </div>
-        </div>
+				<!-- Latest Blog Section -->
+				<div
+					class="content flex-1 p-5 opacity-0 mb-5 animate-fade-in-down"
+					style="animation-delay: 300ms"
+				>
+					<h3 class="text-xl font-semibold">Latest Blog</h3>
+					<div>WIP</div>
+				</div>
 
-        <!-- Contact Section -->
-        <div class="content flex-1 p-5 opacity-0 mb-5 animate-fade-in-down" style="animation-delay: 350ms">
-          <h3 class="text-xl font-semibold">Contact</h3>
-          <p class="mt-2">
-            Feel free to reach me via email at <a href={`mailto:${info.contact.email}`} class="text-white font-bold underline">{info.contact.email}</a>.
-          </p>
-          <p class="mt-2">
-            Or connect with me on <a href={info.contact.linkedin} class="text-white font-bold underline" target="_blank">LinkedIn</a>.
-          </p>
-        </div>
-      </div>
-    </main>
-  </body>
+				<!-- Contact Section -->
+				<div
+					class="content flex-1 p-5 opacity-0 mb-5 animate-fade-in-down"
+					style="animation-delay: 350ms"
+				>
+					<h3 class="text-xl font-semibold">Contact</h3>
+					<p class="mt-2">
+						Feel free to reach me via email at <a
+							href="mailto:alex.gornovoi@gmail.com"
+							class="text-white font-bold underline"
+							>alex.gornovoi@gmail.com</a
+						>.
+					</p>
+					<p class="mt-2">
+						Or connect with me on <a
+							href="https://www.linkedin.com/in/alexeygornovoi/"
+							class="text-white font-bold underline"
+							target="_blank">LinkedIn</a
+						>.
+					</p>
+				</div>
+			</div>
+		</main>
+	</body>
 </html>
