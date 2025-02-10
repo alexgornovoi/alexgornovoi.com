@@ -33,3 +33,20 @@ main {
 .glow-effect-active {
     @apply shadow-lg shadow-white/50;
 }
+
+
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-1rem);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.animate-fade-in-down {
+    animation: fadeInDown 0.3s ease-out forwards;
+}

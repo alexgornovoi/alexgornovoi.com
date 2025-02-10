@@ -8,15 +8,18 @@ const education = [
         logo: Umass,
         name: "University of Massachusetts Amherst",
         time: "Semptember, 2020 - May, 2024",
-        major: "Computer Science and Computational Mathematics"
+        major: "Computer Science and Computational Mathematics",
     },
 ];
 ---
 
 {
-    education.map(({ logo, name, time, major }) => (
-        <div class="content flex-1 p-5">
-            <div class="flex  items-center">
+    education.map(({ logo, name, time, major }, index) => (
+        <div
+            class="content flex-1 p-5 opacity-0  animate-fade-in-down"
+            style={`animation-delay: ${index * 200}ms;`}
+        >
+            <div class="flex items-center">
                 <div class="w-20 h-20 flex items-center bg-off-white mr-5 rounded-lg">
                     <Image alt={name} src={logo} class="w-50" />
                 </div>
@@ -29,7 +32,6 @@ const education = [
         </div>
     ))
 }
-
 
 <!--Template 
 {
