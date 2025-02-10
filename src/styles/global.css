@@ -21,7 +21,7 @@ body {
 }
 
 main {
-    @apply mt-[calc(50px+1.25rem)] w-full max-w-5xl;
+    @apply  w-full max-w-5xl;
 }
 
 .glow-effect {
