@@ -2,6 +2,7 @@
 import { Image } from "astro:assets";
 import "../../../styles/global.css";
 import Cigna from "@assets/experience/cigna.png";
+import Tools from "@components/Tools.astro";
 
 const experience = [
     {
@@ -13,12 +14,14 @@ const experience = [
                 title: "Application Developer Intern",
                 time: "May, 2023 - Auguest, 2023",
                 description: "",
+                tools: []
             },
             {
                 title: "Site Reliability Engineer",
                 time: "July, 2023 - Present",
                 description:
                     "Worked on a Python Package for automating Gremlin chaos tests. Worked with teams to create virtual services. Assisted teams with FMEA",
+                tools: ["Python","FMEA","Gremlin","Chaos Testing","Load Testing"]
             },
         ],
     },
@@ -38,13 +41,16 @@ const experience = [
                 </div>
             </div>
             <div class="flex flex-col-reverse">
-                {positions.map(({ title, time, description }, index) => (
+                {positions.map(({ title, time, description, tools }, index) => (
                     <div>
                         <hr class="my-4 mx-3 h-0.5 border-t-0 dark:bg-off-white/10" />
                         <div class="flex flex-col text-justify">
                             <p class="text-xl font-bold">{title}</p>
                             <p class="text-sm my-1">{time}</p>
                             <p>{description}</p>
+                            <div class="flex">
+                                <Tools tools={tools}/>
+                            </div>
                         </div>
                     </div>
                 ))}
@@ -67,15 +73,8 @@ const experience = [
                 "",
                 ""
             ],
-            "description": ""
-        },
-        {
-            "title": "",
-            "time": [
-                "",
-                ""
-            ],
-            "description": ""
+            "description": "",
+            "tools": []
         }
     ]
 } -->

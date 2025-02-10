@@ -1,13 +1,41 @@
 ---
+import { Image } from "astro:assets";
 import "../../../styles/global.css";
-import experience from "./_experience.json";
+import Umass from "@assets/education/umass.png";
+
+const education = [
+    {
+        logo: Umass,
+        name: "University of Massachusetts Amherst",
+        time: "Semptember, 2020 - May, 2024",
+        major: "Computer Science and Computational Mathematics"
+    },
+];
 ---
 
 {
-    experience.map(({ logo, name, time, positions }) => (
-        <div class="content">
-            <div class="flex"></div>
-            <p>Test</p>
+    education.map(({ logo, name, time, major }) => (
+        <div class="content flex-1 p-5">
+            <div class="flex  items-center">
+                <div class="w-20 h-20 flex items-center bg-off-white mr-5 rounded-lg">
+                    <Image alt={name} src={logo} class="w-50" />
+                </div>
+                <div class="flex flex-col">
+                    <p class="text-2xl font-bold">{name}</p>
+                    <p>{major}</p>
+                    <p class="text-sm">{time}</p>
+                </div>
+            </div>
         </div>
     ))
 }
+
+
+<!--Template 
+{
+        logo: ,
+        name: "",
+        time: "",
+        major: ""
+},
+-->
