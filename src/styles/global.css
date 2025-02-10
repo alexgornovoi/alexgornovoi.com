@@ -12,6 +12,8 @@
 
 body {
     @apply bg-night text-off-white font-sans h-screen flex flex-col items-center;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-tool-box) var(--color-night);
 }
 
 .content {
@@ -49,4 +51,25 @@ main {
 
 .animate-fade-in-down {
     animation: fadeInDown 0.3s ease-out forwards;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--color-tool-box);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color-foreground);
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-night);
+}
+
+::-webkit-scrollbar-track-piece {
+    background-color: var(--color-night);
 }
