@@ -2,8 +2,6 @@
 import { Image } from "astro:assets";
 import "../../styles/global.css";
 import Tools from "@components/Tools.astro";
-import Umass from "@assets/education/umass.png";
-import ClientRouter from "astro/components/ClientRouter.astro";
 import Header from "@components/Header.astro";
 import Github from "@assets/github.svg";
 
@@ -22,7 +20,6 @@ const projects = [
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<ClientRouter />
 	</head>
 	<body>
 		<Header />
@@ -75,13 +72,15 @@ const projects = [
 </html>
 
 <script>
-	const projectDivs = document.querySelectorAll(".content");
+	document.addEventListener("DOMContentLoaded", () => {
+		const projectDivs = document.querySelectorAll(".content");
 
-	projectDivs.forEach((projectDiv) => {
-		projectDiv.addEventListener("click", () => {
-			console.log("???");
-			const projectLink = projectDiv.getAttribute("data-link");
-			window.location.href = projectLink;
+		projectDivs.forEach((projectDiv) => {
+			projectDiv.addEventListener("click", () => {
+				console.log("???");
+				const projectLink = projectDiv.getAttribute("data-link");
+				window.location.href = projectLink;
+			});
 		});
 	});
 </script>

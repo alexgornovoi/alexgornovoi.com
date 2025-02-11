@@ -1,5 +1,4 @@
 ---
-import ClientRouter from "astro/components/ClientRouter.astro";
 import "../../styles/global.css";
 import Header from "../../components/Header.astro";
 import Experience from "./components/Experience.astro";
@@ -9,7 +8,6 @@ import Education from "./components/Education.astro";
 <html>
 	<head>
 		<meta charset="utf-8" />
-		<ClientRouter />
 	</head>
 	<body>
 		<Header />
@@ -45,28 +43,34 @@ import Education from "./components/Education.astro";
 </html>
 
 <script>
-	const buttons =
-		document.querySelectorAll<HTMLButtonElement>("#tabs button");
-	const experienceContent = document.getElementById("experience-content")!;
-	const educationContent = document.getElementById("education-content")!;
+	document.addEventListener("DOMContentLoaded", () => {
+		const buttons =
+			document.querySelectorAll<HTMLButtonElement>("#tabs button");
+		const experienceContent =
+			document.getElementById("experience-content")!;
+		const educationContent = document.getElementById("education-content")!;
 
-	buttons.forEach((button) => {
-		button.addEventListener("click", function (this: HTMLButtonElement) {
-			const tab = this.getAttribute("data-tab");
+		buttons.forEach((button) => {
+			button.addEventListener(
+				"click",
+				function (this: HTMLButtonElement) {
+					const tab = this.getAttribute("data-tab");
 
-			if (tab === "experience") {
-				experienceContent.classList.remove("hidden");
-				educationContent.classList.add("hidden");
-			} else if (tab === "education") {
-				educationContent.classList.remove("hidden");
-				experienceContent.classList.add("hidden");
-			}
+					if (tab === "experience") {
+						experienceContent.classList.remove("hidden");
+						educationContent.classList.add("hidden");
+					} else if (tab === "education") {
+						educationContent.classList.remove("hidden");
+						experienceContent.classList.add("hidden");
+					}
 
-			// Toggle active button styles
-			buttons.forEach((btn) =>
-				btn.classList.remove("glow-effect-active"),
+					// Toggle active button styles
+					buttons.forEach((btn) =>
+						btn.classList.remove("glow-effect-active"),
+					);
+					this.classList.add("glow-effect-active");
+				},
 			);
-			this.classList.add("glow-effect-active");
 		});
 	});
 </script>
