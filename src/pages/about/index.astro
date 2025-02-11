@@ -33,7 +33,10 @@ import Education from "./components/Education.astro";
 				<div id="experience-content" class="flex-1 m-2 mt-4 flex-col">
 					<Experience />
 				</div>
-				<div id="education-content" class="flex-1 hidden m-2 mt-4 flex-col">
+				<div
+					id="education-content"
+					class="flex-1 hidden m-2 mt-4 flex-col"
+				>
 					<Education />
 				</div>
 			</div>
@@ -41,35 +44,29 @@ import Education from "./components/Education.astro";
 	</body>
 </html>
 
-<script is:inline data-astro-rerun>
-	document.addEventListener("astro:page-load", function () {
-		const buttons =
-			document.querySelectorAll<HTMLButtonElement>("#tabs button");
-		const experienceContent =
-			document.getElementById("experience-content")!;
-		const educationContent = document.getElementById("education-content")!;
+<script>
+	const buttons =
+		document.querySelectorAll<HTMLButtonElement>("#tabs button");
+	const experienceContent = document.getElementById("experience-content")!;
+	const educationContent = document.getElementById("education-content")!;
 
-		buttons.forEach((button) => {
-			button.addEventListener(
-				"click",
-				function (this: HTMLButtonElement) {
-					const tab = this.getAttribute("data-tab");
+	buttons.forEach((button) => {
+		button.addEventListener("click", function (this: HTMLButtonElement) {
+			const tab = this.getAttribute("data-tab");
 
-					if (tab === "experience") {
-						experienceContent.classList.remove("hidden");
-						educationContent.classList.add("hidden");
-					} else if (tab === "education") {
-						educationContent.classList.remove("hidden");
-						experienceContent.classList.add("hidden");
-					}
+			if (tab === "experience") {
+				experienceContent.classList.remove("hidden");
+				educationContent.classList.add("hidden");
+			} else if (tab === "education") {
+				educationContent.classList.remove("hidden");
+				experienceContent.classList.add("hidden");
+			}
 
-					// Toggle active button styles
-					buttons.forEach((btn) =>
-						btn.classList.remove("glow-effect-active"),
-					);
-					this.classList.add("glow-effect-active");
-				},
+			// Toggle active button styles
+			buttons.forEach((btn) =>
+				btn.classList.remove("glow-effect-active"),
 			);
+			this.classList.add("glow-effect-active");
 		});
 	});
 </script>

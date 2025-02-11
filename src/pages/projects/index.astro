@@ -74,16 +74,14 @@ const projects = [
 	</body>
 </html>
 
-<script is:inline data-astro-rerun>
-	document.addEventListener("astro:page-load", () => {
-		const projectDivs = document.querySelectorAll(".content");
+<script>
+	const projectDivs = document.querySelectorAll(".content");
 
-		projectDivs.forEach((projectDiv) => {
-			projectDiv.addEventListener("click", () => {
-				console.log("???")
-				const projectLink = projectDiv.getAttribute("data-link");
-				window.location.href = projectLink;
-			});
+	projectDivs.forEach((projectDiv) => {
+		projectDiv.addEventListener("click", () => {
+			console.log("???");
+			const projectLink = projectDiv.getAttribute("data-link");
+			window.location.href = projectLink;
 		});
 	});
 </script>
