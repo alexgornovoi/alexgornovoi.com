@@ -80,6 +80,7 @@ const projects = [
 
 		projectDivs.forEach((projectDiv) => {
 			projectDiv.addEventListener("click", () => {
+				console.log("???")
 				const projectLink = projectDiv.getAttribute("data-link");
 				window.location.href = projectLink;
 			});
