@@ -41,7 +41,7 @@ import Education from "./components/Education.astro";
 	</body>
 </html>
 
-<script>
+<script is:inline data-astro-rerun>
 	document.addEventListener("astro:page-load", function () {
 		const buttons =
 			document.querySelectorAll<HTMLButtonElement>("#tabs button");
