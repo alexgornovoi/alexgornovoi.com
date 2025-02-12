@@ -4,11 +4,10 @@ import "../../styles/global.css";
 import Tools from "@components/Tools.astro";
 import Header from "@components/Header.astro";
 import Github from "@assets/github.svg";
-import { getCollection, render } from 'astro:content';
+import { getCollection, render } from "astro:content";
 
-
-const project_collection = await getCollection('project')
-const projects = project_collection.map((projects)=>projects["data"])
+const project_collection = await getCollection("project");
+const projects = project_collection.map((projects) => projects["data"]);
 ---
 
 <html>
@@ -26,30 +25,11 @@ const projects = project_collection.map((projects)=>projects["data"])
 							projIndex,
 						) => (
 							<div
-								class="content flex flex-col justify-between p-5 opacity-0 animate-fade-in-down rounded-lg min-h-[150px] glow-effect cursor-pointer"
+								class="content flex flex-col justify-between p-5 opacity-0 animate-fade-in-down rounded-lg min-h-[150px] glow-effect cursor-pointer z-0"
 								style={`animation-delay: ${projIndex * 200}ms;`}
 								data-link={id}
 							>
-								<div class="flex items-center justify-between">
-									<p class="text-2xl font-bold">{title}</p>
-									<a
-										class="flex items-center mx-1 group"
-										href={github}
-										target="_blank"
-									>
-										<Image
-											src={Github}
-											width="18"
-											alt={title + "-Github"}
-											class="mr-1 group-hover:cursor-pointer"
-										/>
-										<span class="relative">
-											<span class="relative before:absolute before:left-1/2 before:bottom-0 before:w-0 before:h-[2px] before:bg-off-white before:transition-all before:duration-200 before:ease-in-out group-hover:before:w-full group-hover:before:left-0">
-												Source
-											</span>
-										</span>
-									</a>
-								</div>
+								<p class="text-2xl font-bold">{title}</p>
 								<p class="text-sm mt-2 flex-grow">
 									{description}
 								</p>
@@ -71,7 +51,7 @@ const projects = project_collection.map((projects)=>projects["data"])
 
 		projectDivs.forEach((projectDiv) => {
 			projectDiv.addEventListener("click", () => {
-				console.log("clicked")
+				console.log("clicked");
 				const projectLink = projectDiv.getAttribute("data-link");
 				window.location.href = "projects/" + projectLink;
 			});
