@@ -54,7 +54,7 @@ const blogs = blog_collection.map((blog) => blog["data"]);
 			blogDiv.addEventListener("click", () => {
 				console.log("clicked");
 				const blogLink = blogDiv.getAttribute("data-link");
-				window.location.href = "blogs/" + blogLink;
+				window.location.href = "blog/" + blogLink;
 			});
 		});
 	});
