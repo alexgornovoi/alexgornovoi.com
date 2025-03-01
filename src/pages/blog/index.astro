@@ -1,13 +1,11 @@
 ---
-import { Image } from "astro:assets";
 import "../../styles/global.css";
 import Tools from "@components/Tools.astro";
 import Header from "@components/Header.astro";
-import Github from "@assets/github.svg";
-import { getCollection, render } from "astro:content";
+import { getCollection } from "astro:content";
 
-const blog_collection = await getCollection("blog");
-const blogs = blog_collection.map((blog) => blog["data"]);
+const blogs_collection = await getCollection("blog");
+const blogs = blogs_collection.map((blog) => blog["data"]);
 ---
 
 <html>
@@ -54,7 +52,7 @@ const blogs = blog_collection.map((blog) => blog["data"]);
 			blogDiv.addEventListener("click", () => {
 				console.log("clicked");
 				const blogLink = blogDiv.getAttribute("data-link");
-				window.location.href = "blogs/" + blogLink;
+				window.location.href = "blog/" + blogLink;
 			});
 		});
 	});

@@ -5,11 +5,7 @@ description: Personal website built using Astro and Tailwindcss.
 github: https://github.com/alexgornovoi/alexgornovoi.com
 tools: ["Astro", "Javascript", "Tailwindcss"]
 pubDate: 2/12/2025
+cover: "alexgornovoidotcom/cover.png"
 ---
 
-This is a test written 
 
-
-it has multiuple paragrapghs
-
-lets see how it is handled

@@ -17,7 +17,7 @@ body {
 }
 
 .content {
-    @apply bg-foreground w-full rounded-xl;
+    @apply bg-foreground rounded-xl;
 }
 
 main {
