@@ -5,7 +5,6 @@ import Header from "@components/Header.astro";
 import { getCollection } from "astro:content";
 import { Image } from "astro:assets";
 
-
 const project_collection = await getCollection("project");
 const projects = project_collection.map((projects) => projects["data"]);
 ---
@@ -16,24 +15,36 @@ const projects = project_collection.map((projects) => projects["data"]);
 	</head>
 	<body>
 		<Header />
-		<main class="mt-[calc(50px+1.25rem)] p-5 align-center flex justify-center">
-			<div class="grid grid-cols-1 justify-center sm:w-3/4 md:w-full md:grid-cols-2 gap-6">
+		<main
+			class="mt-[calc(50px+1.25rem)] p-5 align-center flex justify-center"
+		>
+			<div
+				class="grid grid-cols-1 justify-center sm:w-3/4 md:w-full md:grid-cols-2 gap-6"
+			>
 				{
 					projects.map(
 						(
-							{ title, description, id, tools, cover},
+							{ title, description, id, tools, cover },
 							projIndex,
 						) => (
 							<div
-								class="content flex flex-col justify-between p-5 opacity-0 animate-fade-in-down rounded-lg min-h-[150px] glow-effect cursor-pointer z-0"
+								class="content flex flex-col justify-between p-5 opacity-0 animate-fade-in-down rounded-lg h-[400px] glow-effect cursor-pointer z-0"
 								style={`animation-delay: ${projIndex * 200}ms;`}
 								data-link={id}
 							>
-								<img src={cover.src} alt={id} class="mb-5 rounded-lg w-full h-50 object-cover"/>
-								<p class="text-2xl font-bold">{title}</p>
-								<p class="text-sm mt-2 flex-grow">
-									{description}
-								</p>
+								<img
+									src={cover.src}
+									alt={id}
+									class="mb-5 rounded-lg w-full h-45 object-cover"
+								/>
+								<div>
+									<p class="text-2xl font-bold">{title}</p>
+									<div class="max-h-[4.5rem] overflow-hidden">
+										<p class="text-sm mt-2 flex-grow text-ellipsis line-clamp-3">
+											{description}
+										</p>
+									</div>
+								</div>
 								<div class="flex mt-1.5 flex-wrap pt-4">
 									<Tools tools={tools} />
 								</div>
