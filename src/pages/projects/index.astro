@@ -10,63 +10,62 @@ const projects = project_collection.map((projects) => projects["data"]);
 ---
 
 <html>
-	<head>
-		<meta charset="utf-8" />
-	</head>
-	<body>
-		<Header />
-		<main
-			class="mt-[calc(50px+1.25rem)] p-5 align-center flex justify-center"
-		>
-			<div
-				class="grid grid-cols-1 justify-center sm:w-3/4 md:w-full md:grid-cols-2 gap-6"
-			>
-				{
-					projects.map(
-						(
-							{ title, description, id, tools, cover },
-							projIndex,
-						) => (
-							<div
-								class="content flex flex-col justify-between p-5 opacity-0 animate-fade-in-down rounded-lg h-[400px] glow-effect cursor-pointer z-0"
-								style={`animation-delay: ${projIndex * 200}ms;`}
-								data-link={id}
-							>
-								<img
-									src={cover.src}
-									alt={id}
-									class="mb-5 rounded-lg w-full h-45 object-cover"
-								/>
-								<div>
-									<p class="text-2xl font-bold">{title}</p>
-									<div class="max-h-[4.5rem] overflow-hidden">
-										<p class="text-sm mt-2 flex-grow text-ellipsis line-clamp-3">
-											{description}
-										</p>
-									</div>
-								</div>
-								<div class="flex mt-1.5 flex-wrap pt-4">
-									<Tools tools={tools} />
-								</div>
-							</div>
-						),
-					)
-				}
-			</div>
-		</main>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <Header />
+    <main class="mt-[calc(50px+1.25rem)] p-5 align-center flex justify-center">
+      <div
+        class="grid grid-cols-1 justify-center sm:w-3/4 md:w-9/10 md:grid-cols-2 gap-x-6 gap-y-6"
+      >
+        {
+          projects.map(
+            ({ title, description, id, tools, cover }, projIndex) => (
+              <div class="flex w-full justify-center">
+                <div
+                  class="content flex flex-col justify-between p-5 opacity-0 animate-fade-in-down rounded-lg h-[400px] w-[375px] glow-effect cursor-pointer z-0"
+                  style={`animation-delay: ${projIndex * 200}ms;`}
+                  data-link={id}
+                >
+                  <div class="flex w-full justify-center">
+                    <img
+                      src={cover.src}
+                      alt={id}
+                      class="mb-5 rounded-lg h-[200px] w-[300px] object-cover"
+                    />
+                  </div>
+                  <div>
+                    <p class="text-2xl font-bold">{title}</p>
+                    <div class="max-h-[4.5rem] overflow-hidden">
+                      <p class="text-sm mt-2 flex-grow text-ellipsis line-clamp-3">
+                        {description}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="flex mt-1.5 flex-wrap pt-4">
+                    <Tools tools={tools} />
+                  </div>
+                </div>
+              </div>
+            )
+          )
+        }
+      </div>
+    </main>
+  </body>
 </html>
 
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-		const projectDivs = document.querySelectorAll(".content");
+  document.addEventListener("DOMContentLoaded", () => {
+    const projectDivs = document.querySelectorAll(".content");
 
-		projectDivs.forEach((projectDiv) => {
-			projectDiv.addEventListener("click", () => {
-				console.log("clicked");
-				const projectLink = projectDiv.getAttribute("data-link");
-				window.location.href = "projects/" + projectLink;
-			});
-		});
-	});
+    projectDivs.forEach((projectDiv) => {
+      projectDiv.addEventListener("click", () => {
+        console.log("clicked");
+        const projectLink = projectDiv.getAttribute("data-link");
+        window.location.href = "projects/" + projectLink;
+      });
+    });
+  });
 </script>
