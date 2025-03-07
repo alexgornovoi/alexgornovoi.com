@@ -1,0 +1,25 @@
+---
+import "../styles/global.css";
+import Header from "../components/Header.astro";
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <!-- Katex -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.15.2/dist/katex.min.css"
+      integrity="sha384-MlJdn/WNKDGXveldHDdyRP1R4CTHr3FeuDNfhsLPYrq2t0UBkUdK2jyTnXPEK1NQ"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <Header />
+    <main class="flex flex-col items-center h-full py-10">
+      <div class="w-3/4">
+        <slot />
+      </div>
+    </main>
+  </body>
+</html>
