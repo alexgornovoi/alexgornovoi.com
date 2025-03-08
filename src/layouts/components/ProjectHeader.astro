@@ -1,0 +1,25 @@
+---
+import Image from "astro/components/Image.astro";
+import Github from "@assets/github.svg";
+const title = Astro.props.title;
+const github = Astro.props.github;
+---
+
+<div>
+  <p class="font-bold text-4xl">{title}</p>
+  <a class="inline-flex items-center group my-2" href={github} target="_blank">
+    <span class="relative">
+      <span
+        class="relative before:absolute before:left-1/2 before:bottom-0 before:w-0 before:h-[2px] before:bg-off-white before:transition-all before:duration-200 before:ease-in-out group-hover:before:w-full group-hover:before:left-0"
+      >
+        Source
+      </span>
+    </span>
+    <Image
+      src={Github}
+      width="18"
+      alt={"github logo"}
+      class="ml-1 group-hover:cursor-pointer"
+    />
+  </a>
+</div>

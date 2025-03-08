@@ -1,8 +1,9 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
-import PostContent from "../components/PostContent.astro"
-import RelatedBlogs from "../components/RelatedBlogs.astro"
+import Header from "@components/Header.astro";
+import PostContent from "./components/PostContent.astro"
+import RelatedBlogs from "./components/RelatedBlogs.astro"
+import ProjectHeader from "./components/ProjectHeader.astro";
 const details = Astro.props.project.data
 console.log(details)
 ---
@@ -21,8 +22,8 @@ console.log(details)
   <body>
     <Header />
     <main class="flex flex-col items-center h-full py-10">
-      <div class="w-3/4">
-        <p>{details.title}</p>
+      <div class="w-3/4 mt-20">
+        <ProjectHeader github={details.github} title={details.title}/>
         <PostContent>
             <slot />
         </PostContent>

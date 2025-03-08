@@ -8,4 +8,4 @@ pubDate: 2/12/2025
 cover: "alexgornovoidotcom/cover.png"
 ---
 
-Test
+My resume website built using [Astro](https://astro.build/) and [Tailwindcss](https://tailwindcss.com/).
