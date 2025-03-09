@@ -1,11 +1,15 @@
 ---
-const { tools } = Astro.props;
+let { tools, maxWidth } = Astro.props;
+
+if (maxWidth != undefined) {
+  tools = tools.slice(0, Math.min(maxWidth, tools.length));
+}
 ---
 
 {
   tools.map((tool: string) => (
     <div class="bg-tool-box/45 mr-1 mt-1 py-0.5 px-1.5 rounded-full">
-      <p class="text-sm text-off-white/85">{tool}</p>
+      <p class="text-xs text-off-white/85">{tool}</p>
     </div>
   ))
 }

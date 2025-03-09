@@ -42,7 +42,7 @@ function convertDate(date) {
             ) => (
               <div class="flex w-full justify-center">
                 <div
-                  class="content flex flex-col p-3 px-5 opacity-0 animate-fade-in-down rounded-lg h-[120px] w-3/4 glow-effect cursor-pointer"
+                  class="content flex flex-col p-3 px-5 opacity-0 animate-fade-in-down rounded-lg h-[130px] w-3/4 glow-effect cursor-pointer"
                   style={`animation-delay: ${blogIndex * 200}ms;`}
                   data-link={id}
                 >
@@ -51,16 +51,20 @@ function convertDate(date) {
                     <p class="text-sm">{convertDate(pubDate)}</p>
                   </div>
 
-                  <p class="text-sm mt-1">{description}</p>
+                  <div class="max-h-[4.5rem] overflow-hidden">
+                    <p class="text-sm mt-2 flex-grow text-ellipsis line-clamp-2">
+                      {description}
+                    </p>
+                  </div>
 
                   <div class="flex items-center justify-between mt-auto">
                     {project != undefined && (
-                      <p class="text-sm flex">
-                        Related Project {project_map[project].title}
+                      <p class="text-xs flex">
+                        Related Project: {project_map[project].title}
                       </p>
                     )}
                     <div class="flex justify-end">
-                      <Tools tools={tools} />
+                      <Tools tools={tools} maxWidth={3} />
                     </div>
                   </div>
                 </div>
