@@ -1,9 +1,11 @@
 ---
-const {tools} = Astro.props
+const { tools } = Astro.props;
 ---
 
-{tools.map((tool: string)=>(
-    <div class="bg-tool-box/45 mr-1 py-0.5 px-1.5 rounded-full">
-       <p class="text-sm text-off-white/85">{tool}</p>
+{
+  tools.map((tool: string) => (
+    <div class="bg-tool-box/45 mr-1 mt-1 py-0.5 px-1.5 rounded-full">
+      <p class="text-sm text-off-white/85">{tool}</p>
     </div>
-))}
+  ))
+}

@@ -6,113 +6,111 @@ import Umass from "@assets/experience/umass.png";
 import Tools from "@components/Tools.astro";
 
 const experience = [
-    {
-        logo: Cigna,
-        name: "The Cigna Group",
-        time: "May, 2023 - Present",
-        positions: [
-            {
-                title: "Site Reliability Engineer",
-                time: "July, 2023 - Present",
-                description:
-                    ["Worked on a Python Package for automating Gremlin chaos tests. Worked with teams to create virtual services."," Assisted teams with FMEA"],
-                tools: [
-                    "Python",
-                    "FMEA",
-                    "Gremlin",
-                    "Chaos Testing",
-                    "Load Testing",
-                    "Jenkins"
-                ],
-            },
-            {
-                title: "Application Developer Intern",
-                time: "May, 2023 - Auguest, 2023",
-                description: [
-                    "Created framework for E2E testing using Cypress.",
-                    "Setup Cloudbees CI to automate testing whenever code was pushed."
-                ],
-                tools: ["Javascript","Cypress","CI/CD"],
-            },
+  {
+    logo: Cigna,
+    name: "The Cigna Group",
+    time: "May, 2023 - Present",
+    positions: [
+      {
+        title: "Site Reliability Engineer",
+        time: "July, 2023 - Present",
+        description: [
+          "Worked on a Python Package for automating Gremlin chaos tests. Worked with teams to create virtual services.",
+          " Assisted teams with FMEA",
         ],
-    },
-    {
-        logo: Umass,
-        name: "UMass Amherst",
-        role: "Information Technology Assistant and Desktop Support",
-        time: "July, 2022 - May, 2024",
-        description:[
-            "Supported the school of agriculture and college of natural science in resolving tech related issues faced my faculty.",
-            "Imaged and prepared new equipment for faculty."
+        tools: [
+          "Python",
+          "FMEA",
+          "Gremlin",
+          "Chaos Testing",
+          "Load Testing",
+          "Jenkins",
         ],
-        tools:["Computer Provisioning", "Computer Hardware Troubleshooting"]
-    }
+      },
+      {
+        title: "Application Developer Intern",
+        time: "May, 2023 - Auguest, 2023",
+        description: [
+          "Created framework for E2E testing using Cypress.",
+          "Setup Cloudbees CI to automate testing whenever code was pushed.",
+        ],
+        tools: ["Javascript", "Cypress", "CI/CD"],
+      },
+    ],
+  },
+  {
+    logo: Umass,
+    name: "UMass Amherst",
+    role: "Information Technology Assistant and Desktop Support",
+    time: "July, 2022 - May, 2024",
+    description: [
+      "Supported the school of agriculture and college of natural science in resolving tech related issues faced my faculty.",
+      "Imaged and prepared new equipment for faculty.",
+    ],
+    tools: ["Computer Provisioning", "Computer Hardware Troubleshooting"],
+  },
 ];
 ---
 
 {
-    experience.map(({ logo, name, role, time, positions, description,tools }, expIndex) => (
-        <div
-            class="content flex-1 p-5 opacity-0  animate-fade-in-down mb-4"
-            style={`animation-delay: ${expIndex * 200}ms;`}
-        >
-            <div class="flex items-center">
-                <div class="w-20 h-20 flex items-center bg-off-white mr-5 rounded-lg">
-                    <Image alt={name} src={logo} class="w-50" />
-                </div>
-                <div class="flex flex-col">
-                    <p class="text-2xl font-bold">{name}</p>
-                    <p>{role}</p>
-                    <p class="text-sm">{time}</p>
-                </div>
-            </div>
-
-            <!--Display description when experience only has 1 position -->
-
-            {description && (
-                <ul class="my-1 mt-2.5 list-disc ml-4">
-                    {description.map((desc)=>(
-                        <li class="text-sm">{desc}</li>
-                    ))}
-                </ul>
-            )}
-
-            <!--Display tools when experience only has 1 position -->
-
-            {tools && (
-                 <div class="flex mt-1.5">
-                    <Tools tools={tools} />
-                </div>
-            )}
-
-            {positions && positions.length > 0 && (
-                <div class="flex flex-col">
-                    {positions.map(
-                        ({ title, time, description, tools }, posIndex) => (
-                            <div
-                                class="opacity-0 animate-fade-in-down"
-                                style={`animation-delay: ${expIndex * 200 + posIndex * 200}ms;`}
-                            >
-                                <hr class="my-4 mx-3 h-0.5 border-t-0 dark:bg-off-white/10" />
-                                <div class="flex flex-col text-justify">
-                                    <p class="text-xl font-bold">{title}</p>
-                                    <p class="text-sm my-1">{time}</p>
-                                    <ul class="my-1 list-disc ml-4">
-                                        {description.map((desc)=>(
-                                            <li class="text-sm">{desc}</li>
-                                        ))}
-                                    </ul>
-                                    <div class="flex mt-1.5">
-                                        <Tools tools={tools} />
-                                    </div>
-                                </div>
-                            </div>
-                        ),
-                    )}
-                </div>
-            )}
+  experience.map(
+    ({ logo, name, role, time, positions, description, tools }, expIndex) => (
+      <div
+        class="content flex-1 p-5 opacity-0  animate-fade-in-down mb-4"
+        style={`animation-delay: ${expIndex * 200}ms;`}
+      >
+        <div class="flex items-center">
+          <div class="w-20 h-20 flex items-center bg-off-white mr-5 rounded-lg">
+            <Image alt={name} src={logo} class="w-50" />
+          </div>
+          <div class="flex flex-col">
+            <p class="text-2xl font-bold">{name}</p>
+            <p>{role}</p>
+            <p class="text-sm">{time}</p>
+          </div>
         </div>
-    ))
+
+        {description && (
+          <ul class="my-1 mt-2.5 list-disc ml-4">
+            {description.map((desc) => (
+              <li class="text-sm">{desc}</li>
+            ))}
+          </ul>
+        )}
+
+        {tools && (
+          <div class="flex mt-1.5">
+            <Tools tools={tools} />
+          </div>
+        )}
+
+        {positions && positions.length > 0 && (
+          <div class="flex flex-col">
+            {positions.map(({ title, time, description, tools }, posIndex) => (
+              <div
+                class="opacity-0 animate-fade-in-down"
+                style={`animation-delay: ${expIndex * 200 + posIndex * 200}ms;`}
+              >
+                <hr class="my-4 mx-3 h-0.5 border-t-0 dark:bg-off-white/10" />
+                <div class="flex flex-col text-justify">
+                  <p class="text-xl font-bold">{title}</p>
+                  <p class="text-sm my-1">{time}</p>
+                  <ul class="my-1 list-disc ml-4">
+                    {description.map((desc) => (
+                      <li class="text-sm">{desc}</li>
+                    ))}
+                  </ul>
+                  <div class="flex mt-1.5">
+                    <Tools tools={tools} />
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    ),
+  )
 }
 
 <!-- Template {

@@ -1,16 +1,16 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
-import remarkMath from 'remark-math';
-import rehypeKatex from 'rehype-katex';
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 
 export default defineConfig({
-  output: 'static',
+  output: "static",
   vite: {
     plugins: [tailwindcss()],
   },
-  markdown:{
+  markdown: {
     syntaxHighlight: "prism",
     remarkPlugins: [remarkMath],
-    rehypePlugins: [rehypeKatex]
-  }
+    rehypePlugins: [rehypeKatex],
+  },
 });

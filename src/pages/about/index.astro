@@ -6,71 +6,62 @@ import Education from "./components/Education.astro";
 ---
 
 <html>
-	<head>
-		<meta charset="utf-8" />
-	</head>
-	<body>
-		<Header />
-		<main class="mt-[calc(50px+1.25rem)]">
-			<div class="flex w-full" id="tabs">
-				<button
-					class="content w-full justify-center text-center glow-effect glow-effect-active m-2"
-					data-tab="experience"
-				>
-					<p>Experience</p>
-				</button>
-				<button
-					class="content w-full justify-center text-center glow-effect m-2"
-					data-tab="education"
-				>
-					<p class="p-2">Education</p>
-				</button>
-			</div>
-			<!-- Tab Content  -->
-			<div class="flex justify-center w-full mt-4">
-				<div id="experience-content" class="flex-1 m-2 mt-4 flex-col">
-					<Experience />
-				</div>
-				<div
-					id="education-content"
-					class="flex-1 hidden m-2 mt-4 flex-col"
-				>
-					<Education />
-				</div>
-			</div>
-		</main>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+  </head>
+  <body>
+    <Header />
+    <main class="mt-[calc(50px+1.25rem)]">
+      <div class="flex w-full" id="tabs">
+        <button
+          class="content w-full justify-center text-center glow-effect glow-effect-active m-2"
+          data-tab="experience"
+        >
+          <p>Experience</p>
+        </button>
+        <button
+          class="content w-full justify-center text-center glow-effect m-2"
+          data-tab="education"
+        >
+          <p class="p-2">Education</p>
+        </button>
+      </div>
+      <!-- Tab Content  -->
+      <div class="flex justify-center w-full mt-4">
+        <div id="experience-content" class="flex-1 m-2 mt-4 flex-col">
+          <Experience />
+        </div>
+        <div id="education-content" class="flex-1 hidden m-2 mt-4 flex-col">
+          <Education />
+        </div>
+      </div>
+    </main>
+  </body>
 </html>
 
 <script>
-	document.addEventListener("DOMContentLoaded", () => {
-		const buttons =
-			document.querySelectorAll<HTMLButtonElement>("#tabs button");
-		const experienceContent =
-			document.getElementById("experience-content")!;
-		const educationContent = document.getElementById("education-content")!;
+  document.addEventListener("DOMContentLoaded", () => {
+    const buttons =
+      document.querySelectorAll<HTMLButtonElement>("#tabs button");
+    const experienceContent = document.getElementById("experience-content")!;
+    const educationContent = document.getElementById("education-content")!;
 
-		buttons.forEach((button) => {
-			button.addEventListener(
-				"click",
-				function (this: HTMLButtonElement) {
-					const tab = this.getAttribute("data-tab");
+    buttons.forEach((button) => {
+      button.addEventListener("click", function (this: HTMLButtonElement) {
+        const tab = this.getAttribute("data-tab");
 
-					if (tab === "experience") {
-						experienceContent.classList.remove("hidden");
-						educationContent.classList.add("hidden");
-					} else if (tab === "education") {
-						educationContent.classList.remove("hidden");
-						experienceContent.classList.add("hidden");
-					}
+        if (tab === "experience") {
+          experienceContent.classList.remove("hidden");
+          educationContent.classList.add("hidden");
+        } else if (tab === "education") {
+          educationContent.classList.remove("hidden");
+          experienceContent.classList.add("hidden");
+        }
 
-					// Toggle active button styles
-					buttons.forEach((btn) =>
-						btn.classList.remove("glow-effect-active"),
-					);
-					this.classList.add("glow-effect-active");
-				},
-			);
-		});
-	});
+        // Toggle active button styles
+        buttons.forEach((btn) => btn.classList.remove("glow-effect-active"));
+        this.classList.add("glow-effect-active");
+      });
+    });
+  });
 </script>

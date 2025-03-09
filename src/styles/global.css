@@ -1,83 +1,78 @@
 @import "tailwindcss";
 
-
 @theme {
-    --color-night: #010105;
-    --color-foreground: #101014;
-    --color-off-white: #f2fdef;
-    --color-tool-box: #424242;
-    --font-sans: "Arial", sans-serif;
+  --color-night: #010105;
+  --color-foreground: #101014;
+  --color-off-white: #f2fdef;
+  --color-tool-box: #424242;
+  --font-sans: "Arial", sans-serif;
 }
 
-
 body {
-    @apply bg-night text-off-white decoration-off-white font-sans h-screen flex flex-col items-center;
-    scrollbar-width: thin;
-    scrollbar-color: var(--color-tool-box) var(--color-night);
+  @apply bg-night text-off-white decoration-off-white font-sans h-screen flex flex-col items-center;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-tool-box) var(--color-night);
 }
 
 .content {
-    @apply bg-foreground rounded-xl;
+  @apply bg-foreground rounded-xl;
 }
 
 main {
-    @apply w-full max-w-5xl;
+  @apply w-full max-w-5xl;
 }
 
 .glow-effect {
-    @apply border-2 border-transparent transition-all duration-300 ease-in-out;
+  @apply border-2 border-transparent transition-all duration-300 ease-in-out;
 }
 
 .glow-effect:hover {
-    @apply shadow-lg shadow-white/30;
+  @apply shadow-lg shadow-white/30;
 }
 
 .glow-effect-active {
-    @apply shadow-lg shadow-white/50;
+  @apply shadow-lg shadow-white/50;
 }
 
-
 @keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateY(-1rem);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(-1rem);
+  }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .animate-fade-in-down {
-    animation: fadeInDown 0.3s ease-out forwards;
+  animation: fadeInDown 0.3s ease-out forwards;
 }
 
 ::-webkit-scrollbar {
-    width: 10px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar-thumb {
-    background-color: var(--color-tool-box);
-    border-radius: 10px;
+  background-color: var(--color-tool-box);
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-    background-color: var(--color-foreground);
+  background-color: var(--color-foreground);
 }
 
 ::-webkit-scrollbar-track {
-    background-color: var(--color-night);
+  background-color: var(--color-night);
 }
 
 ::-webkit-scrollbar-track-piece {
-    background-color: var(--color-night);
+  background-color: var(--color-night);
 }
-
 
 .article a {
-    @apply border-b transition-colors duration-200 hover:border-current;
-    @apply dark:border-b-slate-500 dark:text-slate-400 dark:hover:text-slate-200;
-    text-decoration: none;
+  @apply border-b transition-colors duration-200 hover:border-current;
+  @apply dark:border-b-slate-500 dark:text-slate-400 dark:hover:text-slate-200;
+  text-decoration: none;
 }
-
