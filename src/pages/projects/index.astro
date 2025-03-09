@@ -63,7 +63,6 @@ const projects = project_collection.map((projects) => projects["data"]);
 
     projectDivs.forEach((projectDiv) => {
       projectDiv.addEventListener("click", () => {
-        console.log("clicked");
         const projectLink = projectDiv.getAttribute("data-link");
         window.location.href = "projects/" + projectLink;
       });

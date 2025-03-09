@@ -3,11 +3,9 @@ import "../../styles/global.css";
 import Tools from "@components/Tools.astro";
 import Header from "@components/Header.astro";
 import { getCollection } from "astro:content";
-import { makeSvgComponent } from "astro/assets/utils";
 
 const blogs_collection = await getCollection("blog");
 const projects_collection = await getCollection("project");
-
 const blogs = blogs_collection.map((blog) => blog["data"]);
 const project_map = {};
 
@@ -83,7 +81,6 @@ function convertDate(date) {
 
     blogDivs.forEach((blogDiv) => {
       blogDiv.addEventListener("click", () => {
-        console.log("clicked");
         const blogLink = blogDiv.getAttribute("data-link");
         window.location.href = "blog/" + blogLink;
       });

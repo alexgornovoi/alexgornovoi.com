@@ -1,3 +1,47 @@
 ---
+import { getCollection } from "astro:content";
+
 const id = Astro.props.id;
+const blogs_collection = await getCollection("blog");
+const blogs = blogs_collection
+  .filter((blog) => blog["data"]["project"] == id)
+  .map((blog) => blog.data);
+
+console.log(blogs);
+function convertDate(date) {
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+
+  return formattedDate;
+}
 ---
+
+<div class="grid grid-cols-1 gap-6">
+  {
+    blogs.map(
+      ({ title, pubDate, project, tools, id, description }, blogIndex) => (
+        <div class="flex w-full justify-center mt-2">
+          <div
+            class="content flex flex-col p-3 px-5 opacity-0 animate-fade-in-down rounded-lg  w-full glow-effect cursor-pointer"
+            style={`animation-delay: ${blogIndex * 200}ms;`}
+            data-link={id}
+          >
+            <div class="flex items-center justify-between">
+              <p class="font-bold">{title}</p>
+              <p class="text-sm">{convertDate(pubDate)}</p>
+            </div>
+
+            <div class="max-h-[4.5rem] overflow-hidden">
+              <p class="text-sm mt-2 flex-grow text-ellipsis line-clamp-2">
+                {description}
+              </p>
+            </div>
+          </div>
+        </div>
+      ),
+    )
+  }
+</div>
