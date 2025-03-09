@@ -2,6 +2,29 @@
 import "../styles/global.css";
 import Header from "../components/Header.astro";
 
+import { getCollection } from "astro:content";
+
+const blogs_collection = await getCollection("blog");
+const blogs = blogs_collection.map((blog) => blog["data"]);
+
+const latestBlog =
+  blogs.length > 0
+    ? blogs.reduce((latest, blog) =>
+        blog.pubDate > latest.pubDate ? blog : latest,
+      )
+    : null;
+
+const latestBlogLink = `/blog/${latestBlog.id}`;
+
+function convertDate(date) {
+  const formattedDate = date.toLocaleDateString("en-US", {
+    month: "long",
+    day: "2-digit",
+    year: "numeric",
+  });
+  return formattedDate;
+}
+
 const info = {
   currentRole: "Site Reliability Engineer",
   currentCompany: "The Cigna Group",
@@ -9,8 +32,6 @@ const info = {
     "Graduated from UMass Amherst with a degree in Computer Science and Computational Mathematics.",
   recentProject: "Working on alexgornovoi.com, read more info here (WIP).",
   interests: "Interested in Artificial Intelligence and Quantitative Finance.",
-  latestBlog:
-    "Working on [Project Name], which aims to [Project Goal]. Excited to see where this goes!",
 };
 ---
 
@@ -70,7 +91,14 @@ const info = {
           style="animation-delay: 300ms"
         >
           <h3 class="text-xl font-semibold">Latest Blog</h3>
-          <div>WIP</div>
+          <p class="mt-2">
+            <a
+              href={latestBlogLink}
+              class="text-white font-bold underline underline-offset-2"
+              >{latestBlog.title}</a
+            >
+            released on {convertDate(latestBlog.pubDate)}
+          </p>
         </div>
 
         <!-- Contact Section -->
@@ -82,13 +110,14 @@ const info = {
           <p class="mt-2">
             Feel free to reach me via email at <a
               href="mailto:alex.gornovoi@gmail.com"
-              class="text-white font-bold underline">alex.gornovoi@gmail.com</a
+              class="text-white font-bold underline underline-offset-2"
+              >alex.gornovoi@gmail.com</a
             >.
           </p>
           <p class="mt-2">
             Or connect with me on <a
               href="https://www.linkedin.com/in/alexeygornovoi/"
-              class="text-white font-bold underline"
+              class="text-white font-bold underline underline-offset-2"
               target="_blank">LinkedIn</a
             >.
           </p>
