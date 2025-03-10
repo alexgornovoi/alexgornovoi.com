@@ -21,9 +21,9 @@ const details = Astro.props.blog.data;
   <body>
     <Header />
     <main class="flex flex-col items-center h-full py-10">
-      <div class="w-3/4 mt-20">
+      <div class="w-3/4">
         <BlogHeader title={details.title} pubDate={details.pubDate} />
-        <PostContent>
+        <PostContent class="mb-40">
           <slot />
         </PostContent>
       </div>

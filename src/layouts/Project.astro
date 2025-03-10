@@ -26,14 +26,6 @@ const details = Astro.props.project.data;
         <PostContent>
           <slot />
         </PostContent>
-        <div class="inline-flex items-center justify-center w-full mt-15 mb-5">
-          <hr class="w-full h-px" />
-          <span
-            class="absolute px-3 font-medium -translate-x-1/2 left-1/2 bg-night"
-          >
-            <p class="text-lg font-bold">Related Blogs</p>
-          </span>
-        </div>
         <RelatedBlogs id={details.id} />
       </div>
     </main>

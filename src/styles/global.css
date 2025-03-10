@@ -90,9 +90,9 @@ main {
 }
 
 .article h1 {
-    @apply text-4xl font-bold mb-[12px];
-  }
-  
-  .article h2 {
-    @apply text-3xl font-bold mb-[24px] mt-[60px];
-  }
+  @apply text-4xl font-bold mb-[12px];
+}
+
+.article h2 {
+  @apply text-3xl font-bold mb-[24px] mt-[60px];
+}

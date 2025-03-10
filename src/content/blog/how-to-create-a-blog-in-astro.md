@@ -12,6 +12,7 @@ This article will discuss how to create a blog using [Astro's Content Collection
 ## Defining the `config.ts`
 
 To get started, we first define our `config.ts` file, which will reside in `/src/content`. We begin by importing the required tools and defining our collection along with the loader method.
+
 ```ts
 import { defineCollection, z } from "astro:content";
 import { glob } from "astro/loaders";
@@ -22,7 +23,6 @@ const blog = defineCollection({
 ```
 
 In the above code, we define our loader method to use `glob` and to load files matching the regex pattern `"**/*.md"` in the directory `"./src/content/blog"`. After defining where the content for our collection is loaded from, we will define the schema for our blogs and export it.
-
 
 ```ts
 import { defineCollection, z } from "astro:content";
@@ -40,7 +40,7 @@ const blog = defineCollection({
   }),
 });
 
-export const collections = {  blog };
+export const collections = { blog };
 ```
 
 Astro's `defineCollection` uses [Zod data types](https://docs.astro.build/en/guides/content-collections/#defining-datatypes-with-zod) for defining the type of values within the schema. Using these data types, you can define a schema tailored to your needs.
@@ -48,7 +48,6 @@ Astro's `defineCollection` uses [Zod data types](https://docs.astro.build/en/gui
 ## Creating a test blog
 
 After defining the config, we will now write a quick test blog. Our Markdown file must include frontmatter that defines the values in our schema.
-
 
 ```md
 ---
