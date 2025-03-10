@@ -1,6 +1,10 @@
 ---
 import "../styles/global.css";
-import Header from "../components/Header.astro";
+import Header from "@components/Header.astro";
+import PostContent from "./components/PostContent.astro";
+import BlogHeader from "./components/BlogHeader.astro";
+
+const details = Astro.props.blog.data;
 ---
 
 <html lang="en">
@@ -17,8 +21,11 @@ import Header from "../components/Header.astro";
   <body>
     <Header />
     <main class="flex flex-col items-center h-full py-10">
-      <div class="w-3/4">
-        <slot />
+      <div class="w-3/4 mt-20">
+        <BlogHeader title={details.title} pubDate={details.pubDate} />
+        <PostContent>
+          <slot />
+        </PostContent>
       </div>
     </main>
   </body>

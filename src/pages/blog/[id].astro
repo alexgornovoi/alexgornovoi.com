@@ -14,6 +14,6 @@ const { blog } = Astro.props;
 const { Content } = await render(blog);
 ---
 
-<Blog>
+<Blog {...Astro.props}>
   <Content />
 </Blog>

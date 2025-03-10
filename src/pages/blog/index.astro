@@ -6,7 +6,9 @@ import { getCollection } from "astro:content";
 
 const blogs_collection = await getCollection("blog");
 const projects_collection = await getCollection("project");
-const blogs = blogs_collection.map((blog) => blog["data"]);
+const blogs = blogs_collection
+  .map((blog) => blog["data"])
+  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 const project_map = {};
 
 projects_collection.forEach(

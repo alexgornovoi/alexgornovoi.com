@@ -5,9 +5,9 @@ const id = Astro.props.id;
 const blogs_collection = await getCollection("blog");
 const blogs = blogs_collection
   .filter((blog) => blog["data"]["project"] == id)
-  .map((blog) => blog.data);
+  .map((blog) => blog.data)
+  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 
-console.log(blogs);
 function convertDate(date) {
   const formattedDate = date.toLocaleDateString("en-US", {
     month: "short",

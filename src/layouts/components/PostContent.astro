@@ -5,3 +5,10 @@
 <section class="mx-auto w-full mt-1 article">
   <slot />
 </section>
+
+<script>
+  document.querySelectorAll(".article a").forEach((link) => {
+    link.setAttribute("target", "_blank");
+    link.setAttribute("rel", "noopener noreferrer");
+  });
+</script>

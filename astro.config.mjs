@@ -9,8 +9,12 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
   markdown: {
-    syntaxHighlight: "prism",
+    syntaxHighlight: "shiki",
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
+    shikiConfig: {
+      theme: "github-dark-high-contrast",
+      wrap: true,
+    },
   },
 });
