@@ -7,6 +7,9 @@ import { getCollection } from "astro:content";
 const blogs_collection = await getCollection("blog");
 const blogs = blogs_collection.map((blog) => blog["data"]);
 
+const project_collection = await getCollection("project");
+const projects = project_collection.map((projects) => projects["data"]);
+
 const latestBlog =
   blogs.length > 0
     ? blogs.reduce((latest, blog) =>
@@ -14,7 +17,15 @@ const latestBlog =
       )
     : null;
 
+const latestProject =
+  projects.length > 0
+    ? projects.reduce((latest, project) =>
+        project.pubDate > latest.pubDate ? project : latest,
+      )
+    : null;
+
 const latestBlogLink = `/blog/${latestBlog.id}`;
+const latestProjectLink = `/projects/${latestProject.id}`;
 
 function convertDate(date) {
   const formattedDate = date.toLocaleDateString("en-US", {
@@ -74,7 +85,14 @@ const info = {
             style="animation-delay: 200ms"
           >
             <h3 class="text-xl font-semibold">Recent Project</h3>
-            <p class="mt-2">{info.recentProject}</p>
+            <p class="mt-2">
+              Working on {latestProject.title}, read more info
+              <a
+                href={latestProjectLink}
+                class="text-white font-bold underline underline-offset-2"
+                >here</a
+              >
+            </p>
           </div>
 
           <div
