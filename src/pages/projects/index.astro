@@ -5,7 +5,10 @@ import Header from "@components/Header.astro";
 import { getCollection } from "astro:content";
 
 const project_collection = await getCollection("project");
-const projects = project_collection.map((projects) => projects["data"]);
+
+const projects = project_collection
+  .map((project) => project["data"])
+  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
 ---
 
 <html>
