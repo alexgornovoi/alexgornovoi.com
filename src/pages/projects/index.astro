@@ -1,75 +1,31 @@
 ---
-import "../../styles/global.css";
-import Tools from "@components/Tools.astro";
-import Header from "@components/Header.astro";
+import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const project_collection = await getCollection("project");
-
-const projects = project_collection
-  .map((project) => project["data"])
-  .sort((a, b) => b.pubDate.getTime() - a.pubDate.getTime());
+const projects = (await getCollection("project")).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
 ---
 
-<html>
-  <head>
-    <meta charset="utf-8" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-  </head>
-  <body>
-    <Header />
-    <main class="mt-[calc(50px+1.25rem)] align-center flex justify-center">
-      <div
-        class="grid grid-cols-1 justify-center sm:w-3/4 md:w-9/10 md:grid-cols-2 gap-x-6 gap-y-6"
-      >
-        {
-          projects.map(
-            ({ title, description, id, tools, cover }, projIndex) => (
-              <div class="flex w-full justify-center">
-                <div
-                  class="content flex flex-col p-5 opacity-0 animate-fade-in-down rounded-lg h-[390px] w-[375px] glow-effect cursor-pointer z-0"
-                  style={`animation-delay: ${projIndex * 100}ms;`}
-                  data-link={id}
-                >
-                  <div class="flex w-full justify-center">
-                    <img
-                      src={cover.src}
-                      alt={id}
-                      class="mb-5 rounded-lg h-[200px] w-[300px] object-cover"
-                    />
-                  </div>
-
-                  <div>
-                    <p class="text-xl font-bold">{title}</p>
-                    <div class="max-h-[4.5rem] overflow-hidden">
-                      <p class="text-sm mt-1 text-ellipsis line-clamp-3">
-                        {description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div class="flex flex-wrap mt-auto">
-                    <Tools tools={tools} maxWidth={3} />
-                  </div>
-                </div>
-              </div>
-            ),
-          )
-        }
-      </div>
-    </main>
-  </body>
-</html>
-
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const projectDivs = document.querySelectorAll(".content");
-
-    projectDivs.forEach((projectDiv) => {
-      projectDiv.addEventListener("click", () => {
-        const projectLink = projectDiv.getAttribute("data-link");
-        window.location.href = "projects/" + projectLink;
-      });
-    });
-  });
-</script>
+<BaseLayout title="Projects">
+  {projects.length === 0 ? (
+    <p class="meta">No projects yet.</p>
+  ) : (
+    <div class="space-y-3">
+      {projects.map((p) => (
+        <div>
+          <p>
+            <a href={`/projects/${p.id}`}>{p.data.title}</a>
+            {p.data.github && (
+              <span>
+                
+                · <a href={p.data.github} target="_blank" rel="noopener noreferrer">source</a>
+              </span>
+            )}
+          </p>
+          <p class="meta">{p.data.description}</p>
+        </div>
+      ))}
+    </div>
+  )}
+</BaseLayout>

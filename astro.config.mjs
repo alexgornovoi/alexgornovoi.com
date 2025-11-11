@@ -13,7 +13,10 @@ export default defineConfig({
     remarkPlugins: [remarkMath],
     rehypePlugins: [rehypeKatex],
     shikiConfig: {
-      theme: "github-dark-high-contrast",
+      themes: {
+        light: "gruvbox-light-hard",
+        dark: "gruvbox-dark-hard",
+      },
       wrap: true,
     },
   },

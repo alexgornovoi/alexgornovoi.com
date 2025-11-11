@@ -1,0 +1,51 @@
+---
+import "../styles/global.css";
+
+interface Props { title?: string; noScroll?: boolean }
+const { title, noScroll = false } = Astro.props;
+const path = Astro.url.pathname;
+function parentHref(p: string) {
+  if (p === "/") return "/";
+  const parts = p.split("/").filter(Boolean);
+  parts.pop();
+  return "/" + (parts.length ? parts.join("/") + "/" : "");
+}
+const showBack = path !== "/";
+const backHref = parentHref(path);
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="/favicon-light.svg" />
+    <script is:inline>
+      (function () {
+        const link = document.getElementById('dynamic-favicon');
+        if (!link) return;
+        const mq = window.matchMedia('(prefers-color-scheme: dark)');
+        const setIcon = () => {
+          link.href = mq.matches ? '/favicon-dark.svg' : '/favicon-light.svg';
+        };
+        setIcon();
+        if (mq.addEventListener) mq.addEventListener('change', setIcon);
+        else if (mq.addListener) mq.addListener(setIcon);
+      })();
+    </script>
+    {title && <title>{title}</title>}
+    <slot name="head" />
+  </head>
+  <body class={noScroll ? "overflow-hidden" : "overflow-auto"}>
+    <main class={
+      noScroll
+        ? "container-center h-screen flex flex-col justify-center overflow-hidden"
+        : "container-center min-h-screen flex flex-col justify-center py-10"
+    }>
+      {showBack && (
+        <div class="mb-4 text-sm">
+          <a href={backHref}>../</a>
+        </div>
+      )}
+      <slot />
+    </main>
+  </body>
+</html>
