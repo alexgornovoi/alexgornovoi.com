@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import AnimatedBackLink from "../components/AnimatedBackLink";
 
 interface Props { title?: string; noScroll?: boolean }
 const { title, noScroll = false } = Astro.props;
@@ -42,10 +43,21 @@ const backHref = parentHref(path);
     }>
       {showBack && (
         <div class="mb-4 text-sm">
-          <a href={backHref}>../</a>
+          <AnimatedBackLink client:load href={backHref} />
         </div>
       )}
       <slot />
     </main>
+    <script type="module" is:inline>
+      import { initLenis } from "../scripts/lenis-scroll";
+      import { initMotionAnimations, initHoverAnimations } from "../scripts/motion-animations";
+
+      const enableLenis = ${JSON.stringify(!noScroll)};
+
+      if (enableLenis) initLenis();
+      initMotionAnimations();
+      initHoverAnimations();
+
+    </script>
   </body>
 </html>

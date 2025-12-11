@@ -1,15 +1,21 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import NavList from "../components/NavList";
 ---
 
 <BaseLayout noScroll={true}>
-  <div class="space-y-2">
+  <div class="space-y-3">
     <p class="text-xl font-bold">Alex Gornovoi</p>
-    <p><a href="/experience">AI Engineer @ Cigna</a></p>
-    <p><a href="/education">MSCS @ GTech</a></p>
-    <p><a href="/projects">Projects</a></p>
-    <p><a href="/blog">Blog</a></p>
-    <p><a href="https://github.com/alexgornovoi" target="_blank" rel="noopener noreferrer">GitHub</a></p>
-    <p><a href="https://www.linkedin.com/in/alexeygornovoi/" target="_blank" rel="noopener noreferrer">LinkedIn</a></p>
+    <NavList
+      client:load
+      links={[
+        { href: "/experience", label: "AI Engineer @ Cigna" },
+        { href: "/education", label: "MSCS @ GTech" },
+        { href: "/projects", label: "Projects" },
+        { href: "/blog", label: "Blog" },
+        { href: "https://github.com/alexgornovoi", label: "GitHub", external: true },
+        { href: "https://www.linkedin.com/in/alexeygornovoi/", label: "LinkedIn", external: true },
+      ]}
+    />
   </div>
 </BaseLayout>

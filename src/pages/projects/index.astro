@@ -11,15 +11,15 @@ const projects = (await getCollection("project")).sort(
   {projects.length === 0 ? (
     <p class="meta">No projects yet.</p>
   ) : (
-    <div class="space-y-3">
+    <div class="space-y-3" data-animate="fade-up">
       {projects.map((p) => (
         <div>
           <p>
-            <a href={`/projects/${p.id}`}>{p.data.title}</a>
+            <a data-hover="lift" href={`/projects/${p.id}`}>{p.data.title}</a>
             {p.data.github && (
               <span>
                 
-                · <a href={p.data.github} target="_blank" rel="noopener noreferrer">source</a>
+                · <a data-hover="lift" href={p.data.github} target="_blank" rel="noopener noreferrer">source</a>
               </span>
             )}
           </p>

@@ -1,13 +1,17 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { education } from "../data/education";
 ---
 
 <BaseLayout title="Education">
-  <p class="mb-2 font-bold">Georgia Institute of Technology</p>
-  <p class="mb-1">Master of Science in Computer Science</p>
-  <p class="meta mb-6">August 2025 · Present</p>
-
-  <p class="mb-2 font-bold">University of Massachusetts Amherst</p>
-  <p class="mb-1">Bachelor of Science in Computer Science & Computational Mathematics</p>
-  <p class="meta">September 2020 · May 2024</p>
+  <div class="leading-tight space-y-3">
+    {education.map((item) => (
+      <div class="mb-5">
+        <p class="mb-0.5 mt-1 font-bold text-lg">{item.school}</p>
+        <p class="mb-0.5">{item.degree}</p>
+        <p class="meta mb-0.5">{item.dates}</p>
+        {item.meta && <p class="meta">{item.meta}</p>}
+      </div>
+    ))}
+  </div>
 </BaseLayout>
