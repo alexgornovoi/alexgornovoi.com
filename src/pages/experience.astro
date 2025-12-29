@@ -1,22 +1,283 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import { experience } from "../data/experience";
+
+const VISIBLE_ROLES = 2;
 ---
 
-<BaseLayout title="Experience">
-  <div class="leading-tight space-y-3">
-    {experience.map((item) => (
-      <div class="mb-5">
-        <p class="mb-1 font-bold text-lg">{item.company}</p>
-        <div class="space-y-2">
-          {item.roles.map((role) => (
-            <div>
-              <p class="mb-0.5">{role.title} · {role.dates}</p>
-              {role.meta && <p class="meta">{role.meta}</p>}
+<BaseLayout title="Experience" wide={true}>
+  <div class="animate-fade-up">
+    <h1 class="kicker mb-2">Experience</h1>
+    <p class="prose-body mb-8">My professional journey and the roles I've held.</p>
+    
+    <div class="space-y-8">
+      {experience.map((company) => {
+        const visibleRoles = company.roles.slice(0, VISIBLE_ROLES);
+        const hiddenRoles = company.roles.slice(VISIBLE_ROLES);
+        const hasHiddenRoles = hiddenRoles.length > 0;
+        
+        return (
+          <article class="card">
+            {/* Company Header */}
+            <header class="flex items-start gap-4 mb-6">
+              <div class="w-12 h-12 rounded-lg flex items-center justify-center flex-shrink-0" 
+                   style="background: var(--surface-2);">
+                <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5">
+                  <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
+                </svg>
+              </div>
+              <div>
+                <h2 class="h2">{company.company}</h2>
+                {company.location && <p class="meta">{company.location}</p>}
+              </div>
+            </header>
+            
+            {/* Roles Timeline - Single rail for all roles */}
+            <div class="roles-timeline">
+              {/* Visible roles */}
+              <ol class="space-y-6">
+                {visibleRoles.map((role) => (
+                  <li class="role-item">
+                    <a href={`/experience/${role.id}`} class="role-link">
+                      <div class="space-y-2">
+                        <div class="space-y-1">
+                          <h3 class="role-title">{role.title}</h3>
+                          <p class="role-meta">{role.dates}</p>
+                        </div>
+                        
+                        {role.description && (
+                          <p class="role-summary">{role.description}</p>
+                        )}
+                        
+                        {role.highlights && role.highlights.length > 0 && (
+                          <ul class="role-bullets">
+                            {role.highlights.map((highlight) => (
+                              <li>{highlight}</li>
+                            ))}
+                          </ul>
+                        )}
+                        
+                        {role.technologies && role.technologies.length > 0 && (
+                          <div class="role-tags">
+                            {role.technologies.map((tech) => (
+                              <span class="role-tag">{tech}</span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+                    </a>
+                  </li>
+                ))}
+              </ol>
+              
+              {/* Expandable hidden roles */}
+              {hasHiddenRoles && (
+                <details class="mt-6">
+                  <summary class="expand-toggle">
+                    <span>Show {hiddenRoles.length} more role{hiddenRoles.length > 1 ? 's' : ''}</span>
+                    <svg class="expand-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M19 9l-7 7-7-7"/>
+                    </svg>
+                  </summary>
+                  
+                  <ol class="mt-6 space-y-6">
+                    {hiddenRoles.map((role) => (
+                      <li class="role-item">
+                        <a href={`/experience/${role.id}`} class="role-link">
+                          <div class="space-y-2">
+                            <div class="space-y-1">
+                              <h3 class="role-title">{role.title}</h3>
+                              <p class="role-meta">{role.dates}</p>
+                            </div>
+                            
+                            {role.description && (
+                              <p class="role-summary">{role.description}</p>
+                            )}
+                            
+                            {role.highlights && role.highlights.length > 0 && (
+                              <ul class="role-bullets">
+                                {role.highlights.map((highlight) => (
+                                  <li>{highlight}</li>
+                                ))}
+                              </ul>
+                            )}
+                            
+                            {role.technologies && role.technologies.length > 0 && (
+                              <div class="role-tags">
+                                {role.technologies.map((tech) => (
+                                  <span class="role-tag">{tech}</span>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </a>
+                      </li>
+                    ))}
+                  </ol>
+                </details>
+              )}
             </div>
-          ))}
-        </div>
-      </div>
-    ))}
+          </article>
+        );
+      })}
+    </div>
   </div>
 </BaseLayout>
+
+<style>
+  /* Roles Timeline - Single rail extending through all content */
+  .roles-timeline {
+    position: relative;
+    padding-left: 28px;
+  }
+  
+  /* Single rail that extends through everything including expanded content */
+  .roles-timeline::before {
+    content: "";
+    position: absolute;
+    left: 4px;
+    top: 8px;
+    bottom: 8px;
+    width: 2px;
+    background: var(--border);
+  }
+  
+  /* Role item with dot */
+  .role-item {
+    position: relative;
+  }
+  
+  /* Timeline dot */
+  .role-item::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 8px;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--surface);
+    border: 2px solid var(--accent);
+    z-index: 1;
+  }
+  
+  /* Role link - clickable with hover effect */
+  .role-link {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    padding: 8px 12px;
+    margin: -8px -12px;
+    border-radius: 8px;
+    transition: background 0.15s ease;
+  }
+  
+  .role-link:hover {
+    background: var(--surface-2);
+  }
+  
+  /* Typography */
+  .role-title {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: 1.125rem;
+    color: var(--text-strong);
+    line-height: 1.3;
+  }
+  
+  .role-meta {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    color: var(--text-faint);
+    letter-spacing: 0.02em;
+  }
+  
+  .role-summary {
+    font-family: var(--font-sans);
+    font-size: 0.9375rem;
+    color: var(--text-muted);
+    line-height: 1.6;
+  }
+  
+  .role-bullets {
+    list-style: disc;
+    padding-left: 1.25rem;
+    margin: 0;
+  }
+  
+  .role-bullets li {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+    color: var(--text-muted);
+    line-height: 1.5;
+    margin-bottom: 0.25rem;
+  }
+  
+  .role-bullets li::marker {
+    color: var(--text-faint);
+  }
+  
+  .role-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    padding-top: 0.5rem;
+  }
+  
+  .role-tag {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    letter-spacing: 0.02em;
+    color: var(--text-muted);
+    background: var(--surface-2);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  /* Expand toggle using details/summary */
+  .expand-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    color: var(--link);
+    padding: 0.5rem 1rem;
+    margin-left: -1rem;
+    border-radius: 6px;
+    transition: color 0.15s ease, background 0.15s ease;
+    list-style: none;
+  }
+  
+  .expand-toggle::-webkit-details-marker {
+    display: none;
+  }
+  
+  .expand-toggle:hover {
+    color: var(--link-hover);
+    background: var(--surface-2);
+  }
+  
+  .expand-icon {
+    width: 1rem;
+    height: 1rem;
+    transition: transform 0.2s ease;
+  }
+  
+  details[open] .expand-icon {
+    transform: rotate(180deg);
+  }
+  
+  details[open] .expand-toggle span {
+    display: none;
+  }
+  
+  details[open] .expand-toggle::before {
+    content: "Show less";
+  }
+</style>

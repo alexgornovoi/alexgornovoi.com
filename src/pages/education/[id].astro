@@ -1,0 +1,122 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
+import { findEducationById, getAllEducationIds } from "../../data/education";
+
+export function getStaticPaths() {
+  const paths = getAllEducationIds().map((id) => ({
+    params: { id },
+  }));
+  return paths;
+}
+
+const { id } = Astro.params;
+const edu = findEducationById(id);
+
+if (!edu) {
+  return Astro.redirect("/education");
+}
+---
+
+<BaseLayout title={`${edu.degree} - ${edu.school}`} wide={true}>
+  <article class="animate-fade-up">
+    <Breadcrumbs items={[
+      { label: "education", href: "/education" },
+      { label: id }
+    ]} />
+    
+    <!-- Header -->
+    <header class="mb-8">
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0" 
+             style="background: var(--surface-2);">
+          <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5">
+            <path d="M12 14l9-5-9-5-9 5 9 5z"/>
+            <path d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"/>
+            <path d="M12 14l9-5-9-5-9 5 9 5zm0 0v6"/>
+          </svg>
+        </div>
+        <div class="min-w-0">
+          <h1 class="h1">{edu.school}</h1>
+          <p class="prose-body" style="color: var(--text-muted);">{edu.degree}</p>
+        </div>
+      </div>
+      <p class="meta mt-3">{edu.dates}</p>
+    </header>
+
+    <!-- Description -->
+    {edu.description && (
+      <section class="mb-8">
+        <p class="prose-body" style="color: var(--text-muted);">
+          {edu.description}
+        </p>
+      </section>
+    )}
+
+    <!-- Coursework -->
+    {edu.coursework && edu.coursework.length > 0 && (
+      <section class="mb-8">
+        <h2 class="kicker mb-4">Relevant Coursework</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+          {edu.coursework.map((course) => (
+            <div class="flex items-center gap-3 p-3 rounded-lg" style="background: var(--surface-2); border: 1px solid var(--border);">
+              <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+              </svg>
+              <span class="prose-muted">{course}</span>
+            </div>
+          ))}
+        </div>
+      </section>
+    )}
+
+    <!-- Achievements -->
+    {edu.achievements && edu.achievements.length > 0 && (
+      <section class="mb-8">
+        <h2 class="kicker mb-4">Achievements & Honors</h2>
+        <ul class="space-y-3">
+          {edu.achievements.map((achievement) => (
+            <li class="flex items-start gap-3">
+              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
+                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+              </svg>
+              <span class="prose-muted">{achievement}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Activities -->
+    {edu.activities && edu.activities.length > 0 && (
+      <section class="mb-8">
+        <h2 class="kicker mb-4">Activities & Involvement</h2>
+        <ul class="space-y-3">
+          {edu.activities.map((activity) => (
+            <li class="flex items-start gap-3">
+              <span class="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--accent);"></span>
+              <span class="prose-muted">{activity}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+    )}
+
+    <!-- Links -->
+    {edu.links && edu.links.length > 0 && (
+      <section class="mb-8">
+        <h2 class="kicker mb-4">Related Links</h2>
+        <div class="flex flex-wrap gap-3">
+          {edu.links.map((link) => (
+            <a href={link.url} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
+              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
+              </svg>
+              {link.label}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+  </article>
+</BaseLayout>

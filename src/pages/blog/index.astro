@@ -2,22 +2,29 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 
-const posts = await getCollection("blog");
+const posts = (await getCollection("blog")).sort(
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+);
 ---
 
-<BaseLayout title="Blog">
-  {posts.length === 0 ? (
-    <p class="meta">No posts yet.</p>
-  ) : (
-    <ul class="list-disc pl-5 space-y-2">
-      {posts
-        .sort((a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime())
-        .map((p) => (
-          <li>
-            <a href={`/blog/${p.id}`}>{p.data.title}</a>
-          </li>
+<BaseLayout title="Blog" wide={true}>
+  <div class="animate-fade-up">
+    <h1 class="kicker mb-2">Blog</h1>
+    <p class="prose-body mb-8">Thoughts on software, AI, and things I'm learning.</p>
+    
+    {posts.length === 0 ? (
+      <p class="prose-muted">No posts yet.</p>
+    ) : (
+      <div class="space-y-4">
+        {posts.map((p) => (
+          <a href={`/blog/${p.id}`} class="card card-interactive block no-link-style">
+            <h2 class="h2 mb-1">{p.data.title}</h2>
+            {p.data.description && (
+              <p class="prose-muted">{p.data.description}</p>
+            )}
+          </a>
         ))}
-    </ul>
-  )}
+      </div>
+    )}
+  </div>
 </BaseLayout>
-

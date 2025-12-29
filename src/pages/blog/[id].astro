@@ -1,5 +1,6 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { getCollection, render } from "astro:content";
 
 export async function getStaticPaths() {
@@ -7,13 +8,32 @@ export async function getStaticPaths() {
   return posts.map((post) => ({ params: { id: post.id }, props: { post } }));
 }
 
+const { id } = Astro.params;
 const { post } = Astro.props;
 const { Content } = await render(post);
+
+// Format date nicely
+const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
 ---
 
-<BaseLayout title={post.data.title}>
-  <h1 class="mb-4" data-animate="fade-in">{post.data.title}</h1>
-  <div class="space-y-4 blog-content" data-animate="fade-up">
-    <Content />
-  </div>
+<BaseLayout title={post.data.title} wide={true}>
+  <article class="animate-fade-up">
+    <Breadcrumbs items={[
+      { label: "blog", href: "/blog" },
+      { label: id }
+    ]} />
+    
+    <header class="mb-8">
+      <h1 class="h1 mb-3">{post.data.title}</h1>
+      <p class="meta">{formattedDate}</p>
+    </header>
+    
+    <div class="blog-content">
+      <Content />
+    </div>
+  </article>
 </BaseLayout>

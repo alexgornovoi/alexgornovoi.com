@@ -7,25 +7,22 @@ const projects = (await getCollection("project")).sort(
 );
 ---
 
-<BaseLayout title="Projects">
-  {projects.length === 0 ? (
-    <p class="meta">No projects yet.</p>
-  ) : (
-    <div class="space-y-3" data-animate="fade-up">
-      {projects.map((p) => (
-        <div>
-          <p>
-            <a data-hover="lift" href={`/projects/${p.id}`}>{p.data.title}</a>
-            {p.data.github && (
-              <span>
-                
-                · <a data-hover="lift" href={p.data.github} target="_blank" rel="noopener noreferrer">source</a>
-              </span>
-            )}
-          </p>
-          <p class="meta">{p.data.description}</p>
-        </div>
-      ))}
-    </div>
-  )}
+<BaseLayout title="Projects" wide={true}>
+  <div class="animate-fade-up">
+    <h1 class="kicker mb-2">Projects</h1>
+    <p class="prose-body mb-8">Things I've built and contributed to.</p>
+    
+    {projects.length === 0 ? (
+      <p class="prose-muted">No projects yet.</p>
+    ) : (
+      <div class="space-y-4">
+        {projects.map((p) => (
+          <a href={`/projects/${p.id}`} class="card card-interactive block no-link-style">
+            <h2 class="h2 mb-1">{p.data.title}</h2>
+            <p class="prose-muted">{p.data.description}</p>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
 </BaseLayout>

@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@astrojs/react": "^4.4.2",
+    "@fontsource/ibm-plex-mono": "^5.2.7",
+    "@fontsource/ibm-plex-sans": "^5.2.8",
     "@studio-freight/react-lenis": "^0.0.47",
     "@tailwindcss/vite": "^4.0.4",
     "@types/react": "^19.2.7",
