@@ -1,53 +1,252 @@
 /* ===========================================
-   Theme Variables - Quiet Terminal
+   Theme Variables - Multi-Theme System
    =========================================== */
 
+/* Base theme definitions using data-theme attribute */
+/* System defaults: light and dark remain the primary themes */
+
 :root {
-  /* Light theme - "paper terminal" */
+  /* Light theme - "paper terminal" (default) */
   --bg: #F8F8F8;
   --surface: #FFFFFF;
   --surface-2: #F0F0F0;
   --border: #DEDEDE;
   --shadow: rgba(0, 0, 0, 0.08);
   
-  /* Text hierarchy (light) */
+  /* Text hierarchy */
   --text-strong: #111111;
   --text: #1F1F1F;
   --text-muted: #4A4A4A;
   --text-faint: #777777;
   
-  /* Links (light) */
+  /* Links */
   --link: #374151;
   --link-hover: #111827;
   
-  /* Accent (keep for badges, icons) */
+  /* Accent */
   --accent: #4B5563;
   --accent-2: #6B7280;
+  
+  /* Theme indicator colors (for selector) */
+  --theme-indicator: #F8F8F8;
+  --theme-indicator-border: #DEDEDE;
   
   color-scheme: light;
 }
 
-html.dark {
-  /* Dark theme - "quiet terminal" */
+/* ===========================================
+   Dark Theme - "Quiet Terminal"
+   =========================================== */
+html.dark,
+[data-theme="dark"] {
   --bg: #0E0F13;
   --surface: #151720;
   --surface-2: #1C1F28;
   --border: #2D3340;
   --shadow: rgba(0, 0, 0, 0.4);
   
-  /* Text hierarchy (dark) */
   --text-strong: #F5F5F5;
   --text: #E0E0E0;
   --text-muted: #A8A8A8;
   --text-faint: #808080;
   
-  /* Links (dark) */
   --link: #C8CCD4;
   --link-hover: #F5F5F5;
   
-  /* Accent (keep for badges, icons) */
   --accent: #A0A8B4;
   --accent-2: #C8CCD4;
+  
+  --theme-indicator: #0E0F13;
+  --theme-indicator-border: #2D3340;
+  
+  color-scheme: dark;
+}
+
+/* ===========================================
+   Forest Theme - Deep greens, nature-inspired
+   =========================================== */
+[data-theme="forest"] {
+  --bg: #0D1210;
+  --surface: #131A17;
+  --surface-2: #1A2420;
+  --border: #2A3B35;
+  --shadow: rgba(0, 0, 0, 0.45);
+  
+  --text-strong: #E8F0EC;
+  --text: #C8D8D0;
+  --text-muted: #8CA898;
+  --text-faint: #5E7A6D;
+  
+  --link: #7CBD9B;
+  --link-hover: #9DDBB8;
+  
+  --accent: #4F9A75;
+  --accent-2: #6BB891;
+  
+  --theme-indicator: #1A2420;
+  --theme-indicator-border: #4F9A75;
+  
+  color-scheme: dark;
+}
+
+/* ===========================================
+   Ocean Theme - Deep blues, calm waters
+   =========================================== */
+[data-theme="ocean"] {
+  --bg: #0A1218;
+  --surface: #0F1820;
+  --surface-2: #152028;
+  --border: #243444;
+  --shadow: rgba(0, 0, 0, 0.45);
+  
+  --text-strong: #E8F0F8;
+  --text: #C0D0E4;
+  --text-muted: #7898B8;
+  --text-faint: #4A6888;
+  
+  --link: #64A8DC;
+  --link-hover: #8CC4F0;
+  
+  --accent: #3B8AC4;
+  --accent-2: #5AA8E0;
+  
+  --theme-indicator: #152028;
+  --theme-indicator-border: #3B8AC4;
+  
+  color-scheme: dark;
+}
+
+/* ===========================================
+   Sunset Theme - Warm coral and amber tones
+   =========================================== */
+[data-theme="sunset"] {
+  --bg: #18100D;
+  --surface: #201614;
+  --surface-2: #2A1E1A;
+  --border: #442F28;
+  --shadow: rgba(0, 0, 0, 0.45);
+  
+  --text-strong: #FFF0E8;
+  --text: #E8D4C8;
+  --text-muted: #B89888;
+  --text-faint: #8A6858;
+  
+  --link: #E89870;
+  --link-hover: #F8B898;
+  
+  --accent: #D87850;
+  --accent-2: #F09068;
+  
+  --theme-indicator: #2A1E1A;
+  --theme-indicator-border: #D87850;
+  
+  color-scheme: dark;
+}
+
+/* ===========================================
+   Lavender Theme - Soft purple, light & airy
+   =========================================== */
+[data-theme="lavender"] {
+  --bg: #F8F6FC;
+  --surface: #FFFFFF;
+  --surface-2: #F0EBF8;
+  --border: #DCD4EA;
+  --shadow: rgba(106, 90, 130, 0.1);
+  
+  --text-strong: #2D2840;
+  --text: #3A3450;
+  --text-muted: #6A5A82;
+  --text-faint: #9888AC;
+  
+  --link: #7C5BB0;
+  --link-hover: #5A3A90;
+  
+  --accent: #8E6DC0;
+  --accent-2: #A888D8;
+  
+  --theme-indicator: #F0EBF8;
+  --theme-indicator-border: #8E6DC0;
+  
+  color-scheme: light;
+}
+
+/* ===========================================
+   Mono Theme - True black & white, high contrast
+   =========================================== */
+[data-theme="mono"] {
+  --bg: #000000;
+  --surface: #0A0A0A;
+  --surface-2: #141414;
+  --border: #2A2A2A;
+  --shadow: rgba(0, 0, 0, 0.6);
+  
+  --text-strong: #FFFFFF;
+  --text: #E0E0E0;
+  --text-muted: #A0A0A0;
+  --text-faint: #606060;
+  
+  --link: #FFFFFF;
+  --link-hover: #CCCCCC;
+  
+  --accent: #FFFFFF;
+  --accent-2: #E0E0E0;
+  
+  --theme-indicator: #000000;
+  --theme-indicator-border: #FFFFFF;
+  
+  color-scheme: dark;
+}
+
+/* ===========================================
+   Sepia Theme - Warm paper, vintage feel
+   =========================================== */
+[data-theme="sepia"] {
+  --bg: #F5F0E6;
+  --surface: #FFFCF5;
+  --surface-2: #EDE6D8;
+  --border: #D8CBBA;
+  --shadow: rgba(80, 60, 40, 0.12);
+  
+  --text-strong: #3A3020;
+  --text: #4A3D2D;
+  --text-muted: #6A5840;
+  --text-faint: #9A8868;
+  
+  --link: #7A5830;
+  --link-hover: #5A3818;
+  
+  --accent: #8A6840;
+  --accent-2: #AA8858;
+  
+  --theme-indicator: #EDE6D8;
+  --theme-indicator-border: #8A6840;
+  
+  color-scheme: light;
+}
+
+/* ===========================================
+   Nord Theme - Arctic, icy blues
+   =========================================== */
+[data-theme="nord"] {
+  --bg: #2E3440;
+  --surface: #3B4252;
+  --surface-2: #434C5E;
+  --border: #4C566A;
+  --shadow: rgba(0, 0, 0, 0.35);
+  
+  --text-strong: #ECEFF4;
+  --text: #D8DEE9;
+  --text-muted: #A3B1C0;
+  --text-faint: #7B8898;
+  
+  --link: #88C0D0;
+  --link-hover: #8FBCBB;
+  
+  --accent: #81A1C1;
+  --accent-2: #5E81AC;
+  
+  --theme-indicator: #3B4252;
+  --theme-indicator-border: #88C0D0;
   
   color-scheme: dark;
 }

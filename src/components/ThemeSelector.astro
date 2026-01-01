@@ -1,0 +1,253 @@
+---
+// Theme definitions with metadata for the selector
+// mode: 'light' or 'dark' for organization
+// isDefault: true for default themes (Light, Dark)
+// textColor: saturated color for visibility on both light and dark backgrounds
+const themes = [
+  { id: 'light', name: 'Light', mode: 'light', isDefault: true, textColor: '#6B7280' },
+  { id: 'dark', name: 'Dark', mode: 'dark', isDefault: true, textColor: '#6B7280' },
+  { id: 'lavender', name: 'Lavender', mode: 'light', isDefault: false, textColor: '#7C3AED' },
+  { id: 'sepia', name: 'Sepia', mode: 'light', isDefault: false, textColor: '#B45309' },
+  { id: 'forest', name: 'Forest', mode: 'dark', isDefault: false, textColor: '#34D399' },
+  { id: 'ocean', name: 'Ocean', mode: 'dark', isDefault: false, textColor: '#38BDF8' },
+  { id: 'sunset', name: 'Sunset', mode: 'dark', isDefault: false, textColor: '#FB923C' },
+  { id: 'nord', name: 'Nord', mode: 'dark', isDefault: false, textColor: '#7DD3FC' },
+  { id: 'mono', name: 'Mono', mode: 'dark', isDefault: false, textColor: '#9CA3AF' },
+];
+
+const defaultThemes = themes.filter(t => t.isDefault);
+const customLightThemes = themes.filter(t => !t.isDefault && t.mode === 'light');
+const customDarkThemes = themes.filter(t => !t.isDefault && t.mode === 'dark');
+---
+
+<div class="theme-selector" id="theme-selector">
+  <button 
+    class="theme-selector-trigger"
+    id="theme-trigger"
+    aria-label="Select theme"
+    aria-expanded="false"
+    aria-haspopup="listbox"
+  >
+    <span class="theme-current-indicator" id="theme-indicator"></span>
+    <svg class="theme-chevron" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+  </button>
+  
+  <div class="theme-dropdown" id="theme-dropdown" role="listbox" aria-label="Theme options">
+    <div class="theme-group">
+      <span class="theme-group-label">System</span>
+      <button 
+        class="theme-option"
+        data-theme="system"
+        role="option"
+      >
+        <span class="theme-option-indicator system-indicator">
+          <svg viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M3 5a2 2 0 012-2h10a2 2 0 012 2v8a2 2 0 01-2 2h-2.22l.123.489.804.804A1 1 0 0113 18H7a1 1 0 01-.707-1.707l.804-.804L7.22 15H5a2 2 0 01-2-2V5zm5.771 7H5V5h10v7H8.771z" clip-rule="evenodd" />
+          </svg>
+        </span>
+        <span class="theme-option-name">System</span>
+        <svg class="theme-check" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+        </svg>
+      </button>
+    </div>
+    
+    <div class="theme-group">
+      <span class="theme-group-label">Defaults</span>
+      {defaultThemes.map(theme => (
+        <button 
+          class="theme-option"
+          data-theme={theme.id}
+          data-text-color={theme.textColor}
+          role="option"
+        >
+          <span class={`theme-option-indicator ${theme.id}-indicator`}></span>
+          <span class="theme-option-name" style={`color: ${theme.textColor};`}>{theme.name}</span>
+          <svg class="theme-check" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      ))}
+    </div>
+    
+    <div class="theme-group">
+      <span class="theme-group-label">Light Themes</span>
+      {customLightThemes.map(theme => (
+        <button 
+          class="theme-option"
+          data-theme={theme.id}
+          data-text-color={theme.textColor}
+          role="option"
+        >
+          <span class={`theme-option-indicator ${theme.id}-indicator`}></span>
+          <span class="theme-option-name" style={`color: ${theme.textColor};`}>{theme.name}</span>
+          <svg class="theme-check" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      ))}
+    </div>
+    
+    <div class="theme-group">
+      <span class="theme-group-label">Dark Themes</span>
+      {customDarkThemes.map(theme => (
+        <button 
+          class="theme-option"
+          data-theme={theme.id}
+          data-text-color={theme.textColor}
+          role="option"
+        >
+          <span class={`theme-option-indicator ${theme.id}-indicator`}></span>
+          <span class="theme-option-name" style={`color: ${theme.textColor};`}>{theme.name}</span>
+          <svg class="theme-check" viewBox="0 0 20 20" fill="currentColor">
+            <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd" />
+          </svg>
+        </button>
+      ))}
+    </div>
+  </div>
+</div>
+
+<script>
+  function initThemeSelector() {
+    const trigger = document.getElementById('theme-trigger');
+    const dropdown = document.getElementById('theme-dropdown');
+    const indicator = document.getElementById('theme-indicator');
+    const options = document.querySelectorAll('.theme-option');
+    
+    if (!trigger || !dropdown || !indicator) return;
+    
+    // Theme color definitions for indicator
+    const themeColors: Record<string, { bg: string; border: string }> = {
+      light: { bg: '#F8F8F8', border: '#DEDEDE' },
+      dark: { bg: '#0E0F13', border: '#2D3340' },
+      forest: { bg: '#1A2420', border: '#4F9A75' },
+      ocean: { bg: '#152028', border: '#3B8AC4' },
+      sunset: { bg: '#2A1E1A', border: '#D87850' },
+      lavender: { bg: '#F0EBF8', border: '#8E6DC0' },
+      sepia: { bg: '#EDE6D8', border: '#8A6840' },
+      nord: { bg: '#3B4252', border: '#88C0D0' },
+      mono: { bg: '#000000', border: '#FFFFFF' },
+      system: { bg: 'linear-gradient(135deg, #F8F8F8 50%, #0E0F13 50%)', border: '#888888' },
+    };
+    
+    function getStoredTheme(): string {
+      return localStorage.getItem('theme') || 'system';
+    }
+    
+    function getEffectiveTheme(): string {
+      const stored = getStoredTheme();
+      if (stored === 'system') {
+        return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      return stored;
+    }
+    
+    function applyTheme(themeId: string) {
+      const html = document.documentElement;
+      
+      // Remove old theme classes and attributes
+      html.classList.remove('dark');
+      html.removeAttribute('data-theme');
+      
+      // Determine effective theme
+      let effectiveTheme = themeId;
+      if (themeId === 'system') {
+        effectiveTheme = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      
+      // Apply theme
+      if (effectiveTheme === 'dark') {
+        html.classList.add('dark');
+      } else if (effectiveTheme !== 'light') {
+        html.setAttribute('data-theme', effectiveTheme);
+      }
+      
+      // Update favicon
+      const favicon = document.getElementById('dynamic-favicon') as HTMLLinkElement;
+      if (favicon) {
+        const isDark = effectiveTheme !== 'light' && effectiveTheme !== 'lavender' && effectiveTheme !== 'sepia';
+        favicon.href = isDark ? '/favicon-dark.svg' : '/favicon-light.svg';
+      }
+    }
+    
+    function updateIndicator(themeId: string) {
+      const colors = themeColors[themeId] || themeColors.light;
+      if (themeId === 'system') {
+        indicator.style.background = colors.bg;
+      } else {
+        indicator.style.background = colors.bg;
+      }
+      indicator.style.borderColor = colors.border;
+    }
+    
+    function updateActiveOption(themeId: string) {
+      options.forEach(opt => {
+        const isActive = opt.getAttribute('data-theme') === themeId;
+        opt.classList.toggle('active', isActive);
+        opt.setAttribute('aria-selected', String(isActive));
+      });
+    }
+    
+    function toggleDropdown(open?: boolean) {
+      const isOpen = open ?? !dropdown.classList.contains('open');
+      dropdown.classList.toggle('open', isOpen);
+      trigger.setAttribute('aria-expanded', String(isOpen));
+    }
+    
+    // Initialize
+    const stored = getStoredTheme();
+    applyTheme(stored);
+    updateIndicator(stored);
+    updateActiveOption(stored);
+    
+    // Trigger click
+    trigger.addEventListener('click', (e) => {
+      e.stopPropagation();
+      toggleDropdown();
+    });
+    
+    // Option selection
+    options.forEach(option => {
+      option.addEventListener('click', () => {
+        const themeId = option.getAttribute('data-theme');
+        if (!themeId) return;
+        
+        localStorage.setItem('theme', themeId);
+        applyTheme(themeId);
+        updateIndicator(themeId);
+        updateActiveOption(themeId);
+        toggleDropdown(false);
+      });
+    });
+    
+    // Close on outside click
+    document.addEventListener('click', (e) => {
+      if (!trigger.contains(e.target as Node) && !dropdown.contains(e.target as Node)) {
+        toggleDropdown(false);
+      }
+    });
+    
+    // Close on escape
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        toggleDropdown(false);
+      }
+    });
+    
+    // Listen for system preference changes
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+      if (getStoredTheme() === 'system') {
+        applyTheme('system');
+      }
+    });
+  }
+  
+  // Initialize on load
+  initThemeSelector();
+  
+  // Re-initialize after View Transitions
+  document.addEventListener('astro:after-swap', initThemeSelector);
+</script>
