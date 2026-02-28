@@ -50,9 +50,8 @@ brew install --cask alexgornovoi/homebrew-tap/rulepack
 ### Ubuntu PPA
 
 ```bash
-sudo add-apt-repository ppa:alexgornovoi/rulepack
+sudo add-apt-repository ppa:agornovoi/rulepack
 sudo apt update
-sudo apt install rulepack
 ```
 
 ## Links
