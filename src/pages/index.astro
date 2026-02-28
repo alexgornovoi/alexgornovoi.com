@@ -10,7 +10,10 @@ import ThemeSelector from "../components/ThemeSelector.astro";
 const projects = (await getCollection("project")).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
 );
-const featuredProjects = projects.slice(0, 3);
+const featuredProjectIds = ["rulepack", "alexgornovoidotcom"];
+const featuredProjects = featuredProjectIds
+  .map((id) => projects.find((project) => project.id === id))
+  .filter((project): project is (typeof projects)[number] => Boolean(project));
 
 // Get blog posts
 const posts = (await getCollection("blog")).sort(

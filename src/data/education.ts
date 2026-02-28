@@ -25,6 +25,8 @@ export const education: EducationItem[] = [
     description: "Pursuing a Master's degree in Computer Science with a specialization in Machine Learning. The program focuses on advanced topics in artificial intelligence, deep learning, and their applications in real-world systems.",
     coursework: [
       "Computer Vision",
+      "Machine Learning",
+      "Time Series Analysis",
     ],
   },
   {
