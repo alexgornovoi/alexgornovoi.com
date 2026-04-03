@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { getCollection, render } from "astro:content";
+import { resolveBlogRelatedItem } from "../../utils/blogRelations";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const { post } = Astro.props;
 const { Content } = await render(post);
+const relatedItem = await resolveBlogRelatedItem(post);
 
 // Format date nicely
 const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
@@ -30,6 +32,16 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
     <header class="mb-8">
       <h1 class="h1 mb-3">{post.data.title}</h1>
       <p class="meta">{formattedDate}</p>
+
+      {relatedItem && (
+        <section class="mt-6">
+          <h2 class="kicker mb-4">Related To</h2>
+          <a href={relatedItem.href} class="btn btn-outline">
+            <span>{relatedItem.typeLabel}:</span>
+            <span>{relatedItem.label}</span>
+          </a>
+        </section>
+      )}
     </header>
     
     <div class="blog-content">

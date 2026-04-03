@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { getCollection, render } from "astro:content";
+import { getBlogsForRelation } from "../../utils/blogRelations";
 
 export async function getStaticPaths() {
   const projects = await getCollection("project");
@@ -11,6 +12,7 @@ export async function getStaticPaths() {
 const { id } = Astro.params;
 const { project } = Astro.props;
 const { Content } = await render(project);
+const relatedPosts = await getBlogsForRelation("project", project.id);
 ---
 
 <BaseLayout title={project.data.title} wide={true}>
@@ -37,5 +39,21 @@ const { Content } = await render(project);
     <div class="blog-content">
       <Content />
     </div>
+
+    {relatedPosts.length > 0 && (
+      <section class="mt-10">
+        <h2 class="kicker mb-4">Related Blog Posts</h2>
+        <div class="space-y-4">
+          {relatedPosts.map((post) => (
+            <a href={`/blog/${post.id}`} class="card card-interactive block no-link-style">
+              <h3 class="h2 mb-1">{post.data.title}</h3>
+              {post.data.description && (
+                <p class="prose-muted">{post.data.description}</p>
+              )}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
   </article>
 </BaseLayout>

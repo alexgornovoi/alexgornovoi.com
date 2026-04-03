@@ -2,6 +2,7 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
 import { findEducationById, getAllEducationIds } from "../../data/education";
+import { getBlogsForRelation } from "../../utils/blogRelations";
 
 export function getStaticPaths() {
   const paths = getAllEducationIds().map((id) => ({
@@ -16,6 +17,8 @@ const edu = findEducationById(id);
 if (!edu) {
   return Astro.redirect("/education");
 }
+
+const relatedPosts = await getBlogsForRelation("education", edu.id);
 ---
 
 <BaseLayout title={`${edu.degree} - ${edu.school}`} wide={true}>
@@ -113,6 +116,22 @@ if (!edu) {
                 <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
               </svg>
               {link.label}
+            </a>
+          ))}
+        </div>
+      </section>
+    )}
+
+    {relatedPosts.length > 0 && (
+      <section class="mb-8">
+        <h2 class="kicker mb-4">Related Blog Posts</h2>
+        <div class="space-y-4">
+          {relatedPosts.map((post) => (
+            <a href={`/blog/${post.id}`} class="card card-interactive block no-link-style">
+              <h3 class="h2 mb-1">{post.data.title}</h3>
+              {post.data.description && (
+                <p class="prose-muted">{post.data.description}</p>
+              )}
             </a>
           ))}
         </div>

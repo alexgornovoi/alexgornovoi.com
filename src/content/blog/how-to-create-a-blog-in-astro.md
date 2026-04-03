@@ -4,7 +4,9 @@ id: how-to-create-a-blog-in-astro
 description: Learn how to create a blog with Astro’s Content Collections.
 tools: ["Astro", "Javascript", "Tailwindcss"]
 pubDate: 3/10/2025
-project: alexgornovoidotcom
+related:
+  type: project
+  id: alexgornovoidotcom
 ---
 
 This article will discuss how to create a blog using [Astro's Content Collection](https://docs.astro.build/en/guides/content-collections/). Astro offers multiple ways to customize content collections; however, I will focus on creating collections for Markdown files using the `glob` loader, as this method worked best for me when building this blog.
