@@ -1,0 +1,29 @@
+---
+export type StackedCardItem = {
+  href: string;
+  title: string;
+  description?: string | null;
+};
+
+interface Props {
+  items: StackedCardItem[];
+  emptyMessage: string;
+}
+
+const { items, emptyMessage } = Astro.props;
+---
+
+{
+  items.length === 0 ? (
+    <p class="prose-muted">{emptyMessage}</p>
+  ) : (
+    <div class="space-y-4">
+      {items.map((item) => (
+        <a href={item.href} class="card card-interactive block no-link-style">
+          <h2 class="h2 mb-1">{item.title}</h2>
+          {item.description && <p class="prose-muted">{item.description}</p>}
+        </a>
+      ))}
+    </div>
+  )
+}

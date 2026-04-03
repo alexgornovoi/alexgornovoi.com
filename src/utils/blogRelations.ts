@@ -2,13 +2,11 @@ import { getCollection, type CollectionEntry } from "astro:content";
 import { findEducationById } from "../data/education";
 import { findRoleById } from "../data/experience";
 
-export type RelatedContentType = "project" | "education" | "experience";
+type RelatedContentType = "project" | "education" | "experience";
 
-export type ResolvedRelatedItem = {
-  type: RelatedContentType;
+type ResolvedRelatedItem = {
   href: string;
   label: string;
-  description?: string;
   typeLabel: string;
 };
 
@@ -37,10 +35,8 @@ export async function resolveBlogRelatedItem(
     }
 
     return {
-      type: "project",
       href: `/projects/${project.id}`,
       label: project.data.title,
-      description: project.data.description,
       typeLabel: "Project",
     };
   }
@@ -53,10 +49,8 @@ export async function resolveBlogRelatedItem(
     }
 
     return {
-      type: "education",
       href: `/education/${education.id}`,
       label: education.school,
-      description: education.degree,
       typeLabel: "Education",
     };
   }
@@ -68,10 +62,8 @@ export async function resolveBlogRelatedItem(
   }
 
   return {
-    type: "experience",
     href: `/experience/${experience.role.id}`,
     label: `${experience.role.title} at ${experience.company.company}`,
-    description: experience.role.description,
     typeLabel: "Experience",
   };
 }

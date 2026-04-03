@@ -1,0 +1,18 @@
+---
+import IconCheckCircle from "./icons/IconCheckCircle.astro";
+
+interface Props {
+  items: string[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="space-y-3">
+  {items.map((item) => (
+    <li class="flex items-start gap-3">
+      <IconCheckCircle class="w-5 h-5 shrink-0 mt-0.5" style="color: var(--accent);" />
+      <span class="prose-muted">{item}</span>
+    </li>
+  ))}
+</ul>

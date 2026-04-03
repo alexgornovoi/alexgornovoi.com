@@ -34,13 +34,12 @@ const formattedDate = post.data.pubDate.toLocaleDateString('en-US', {
       <p class="meta">{formattedDate}</p>
 
       {relatedItem && (
-        <section class="mt-6">
-          <h2 class="kicker mb-4">Related To</h2>
+        <div class="mt-4">
           <a href={relatedItem.href} class="btn btn-outline">
             <span>{relatedItem.typeLabel}:</span>
             <span>{relatedItem.label}</span>
           </a>
-        </section>
+        </div>
       )}
     </header>
     

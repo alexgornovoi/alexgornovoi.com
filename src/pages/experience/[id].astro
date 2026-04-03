@@ -1,14 +1,19 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Breadcrumbs from "../../components/Breadcrumbs.astro";
-import { experience, findRoleById, getAllRoleIds } from "../../data/experience";
+import DetailHero from "../../components/DetailHero.astro";
+import KickerSection from "../../components/KickerSection.astro";
+import DotBulletList from "../../components/DotBulletList.astro";
+import CheckmarkList from "../../components/CheckmarkList.astro";
+import TagList from "../../components/TagList.astro";
+import RelatedLinks from "../../components/RelatedLinks.astro";
+import RelatedBlogPosts from "../../components/RelatedBlogPosts.astro";
+import IconBuilding from "../../components/icons/IconBuilding.astro";
+import { findRoleById, getAllRoleIds } from "../../data/experience";
 import { getBlogsForRelation } from "../../utils/blogRelations";
 
 export function getStaticPaths() {
-  const paths = getAllRoleIds().map((id) => ({
-    params: { id },
-  }));
-  return paths;
+  return getAllRoleIds().map((id) => ({ params: { id } }));
 }
 
 const { id } = Astro.params;
@@ -20,116 +25,53 @@ if (!result) {
 
 const { company, role } = result;
 const relatedPosts = await getBlogsForRelation("experience", role.id);
+const metaLine = `${role.dates}${company.location ? ` · ${company.location}` : ""}`;
 ---
 
 <BaseLayout title={`${role.title} at ${company.company}`} wide={true}>
   <article class="animate-fade-up">
-    <Breadcrumbs items={[
-      { label: "experience", href: "/experience" },
-      { label: id }
-    ]} />
-    
-    <!-- Header -->
-    <header class="mb-8">
-      <div class="flex items-center gap-4">
-        <div class="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0" 
-             style="background: var(--surface-2);">
-          <svg class="icon-lg" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5">
-            <path d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/>
-          </svg>
-        </div>
-        <div class="min-w-0">
-          <h1 class="h1">{role.title}</h1>
-          <p class="prose-body" style="color: var(--text-muted);">{company.company}</p>
-        </div>
-      </div>
-      <p class="meta mt-3">
-        {role.dates}{company.location && ` · ${company.location}`}
-      </p>
-    </header>
+    <Breadcrumbs
+      items={[
+        { label: "experience", href: "/experience" },
+        { label: id },
+      ]}
+    />
 
-    <!-- Description -->
+    <DetailHero title={role.title} subtitle={company.company} meta={metaLine}>
+      <IconBuilding slot="icon" class="icon-lg" />
+    </DetailHero>
+
     <section class="mb-8">
       <p class="prose-body" style="color: var(--text-muted);">
         {role.longDescription || role.description}
       </p>
     </section>
 
-    <!-- Highlights -->
-    {role.highlights && role.highlights.length > 0 && (
-      <section class="mb-8">
-        <h2 class="kicker mb-4">Key Responsibilities</h2>
-        <ul class="space-y-3">
-          {role.highlights.map((highlight) => (
-            <li class="flex items-start gap-3">
-              <span class="mt-2 w-1.5 h-1.5 rounded-full flex-shrink-0" style="background: var(--accent);"></span>
-              <span class="prose-muted">{highlight}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+    {
+      role.highlights && role.highlights.length > 0 && (
+        <KickerSection title="Key Responsibilities">
+          <DotBulletList items={role.highlights} />
+        </KickerSection>
+      )
+    }
 
-    <!-- Achievements -->
-    {role.achievements && role.achievements.length > 0 && (
-      <section class="mb-8">
-        <h2 class="kicker mb-4">Achievements</h2>
-        <ul class="space-y-3">
-          {role.achievements.map((achievement) => (
-            <li class="flex items-start gap-3">
-              <svg class="w-5 h-5 flex-shrink-0 mt-0.5" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="2">
-                <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-              </svg>
-              <span class="prose-muted">{achievement}</span>
-            </li>
-          ))}
-        </ul>
-      </section>
-    )}
+    {
+      role.achievements && role.achievements.length > 0 && (
+        <KickerSection title="Achievements">
+          <CheckmarkList items={role.achievements} />
+        </KickerSection>
+      )
+    }
 
-    <!-- Technologies -->
-    {role.technologies && role.technologies.length > 0 && (
-      <section class="mb-8">
-        <h2 class="kicker mb-4">Technologies</h2>
-        <div class="flex flex-wrap gap-2">
-          {role.technologies.map((tech) => (
-            <span class="badge">{tech}</span>
-          ))}
-        </div>
-      </section>
-    )}
+    {
+      role.technologies && role.technologies.length > 0 && (
+        <KickerSection title="Technologies">
+          <TagList tags={role.technologies} />
+        </KickerSection>
+      )
+    }
 
-    <!-- Links -->
-    {role.links && role.links.length > 0 && (
-      <section class="mb-8">
-        <h2 class="kicker mb-4">Related Links</h2>
-        <div class="flex flex-wrap gap-3">
-          {role.links.map((link) => (
-            <a href={link.url} target="_blank" rel="noopener noreferrer" class="btn btn-outline">
-              <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/>
-              </svg>
-              {link.label}
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
-
-    {relatedPosts.length > 0 && (
-      <section class="mb-8">
-        <h2 class="kicker mb-4">Related Blog Posts</h2>
-        <div class="space-y-4">
-          {relatedPosts.map((post) => (
-            <a href={`/blog/${post.id}`} class="card card-interactive block no-link-style">
-              <h3 class="h2 mb-1">{post.data.title}</h3>
-              {post.data.description && (
-                <p class="prose-muted">{post.data.description}</p>
-              )}
-            </a>
-          ))}
-        </div>
-      </section>
-    )}
+    <RelatedLinks links={role.links ?? []} />
+    <RelatedBlogPosts posts={relatedPosts} />
   </article>
 </BaseLayout>

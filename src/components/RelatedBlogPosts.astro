@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  posts: CollectionEntry<"blog">[];
+  class?: string;
+}
+
+const { posts, class: className = "mb-8" } = Astro.props;
+---
+
+{
+  posts.length > 0 && (
+    <section class={className}>
+      <h2 class="kicker mb-4">Related Blog Posts</h2>
+      <div class="space-y-4">
+        {posts.map((post) => (
+          <a href={`/blog/${post.id}`} class="card card-interactive block no-link-style">
+            <h3 class="h3 mb-1">{post.data.title}</h3>
+            {post.data.description && <p class="prose-muted">{post.data.description}</p>}
+          </a>
+        ))}
+      </div>
+    </section>
+  )
+}

@@ -1,0 +1,37 @@
+---
+import type { EducationItem } from "../data/education";
+import IconGraduationCap from "./icons/IconGraduationCap.astro";
+
+interface Props {
+  edu: EducationItem;
+  size?: "sm" | "lg";
+}
+
+const { edu, size = "sm" } = Astro.props;
+const href = `/education/${edu.id}`;
+const iconBoxClass = size === "sm" ? "w-10 h-10" : "w-12 h-12";
+const iconSvgClass = size === "sm" ? "icon" : "icon-lg";
+const headingClass = size === "sm" ? "h3 mb-1" : "h2 mb-1";
+---
+
+<a href={href} class="card card-interactive block no-link-style">
+  <div class="flex items-start gap-4">
+    <div
+      class:list={[iconBoxClass, "rounded-lg flex items-center justify-center flex-shrink-0"]}
+      style="background: var(--surface-2); color: var(--accent);"
+    >
+      <IconGraduationCap class={iconSvgClass} />
+    </div>
+    <div class="flex-1 min-w-0">
+      {
+        size === "sm" ? (
+          <h3 class={headingClass}>{edu.school}</h3>
+        ) : (
+          <h2 class={headingClass}>{edu.school}</h2>
+        )
+      }
+      <p class="prose-muted mb-1">{edu.degree}</p>
+      <p class="meta">{edu.dates}</p>
+    </div>
+  </div>
+</a>

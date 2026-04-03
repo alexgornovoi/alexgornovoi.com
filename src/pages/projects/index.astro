@@ -1,28 +1,26 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import PageIntro from "../../components/PageIntro.astro";
+import StackedCardLinks from "../../components/StackedCardLinks.astro";
 import { getCollection } from "astro:content";
 
 const projects = (await getCollection("project")).sort(
-  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime()
+  (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
 );
+
+const items = projects.map((p) => ({
+  href: `/projects/${p.id}`,
+  title: p.data.title,
+  description: p.data.description,
+}));
 ---
 
 <BaseLayout title="Projects" wide={true}>
   <div class="animate-fade-up">
-    <h1 class="kicker mb-2">Projects</h1>
-    <p class="prose-body mb-8">Things I've built and contributed to.</p>
-    
-    {projects.length === 0 ? (
-      <p class="prose-muted">No projects yet.</p>
-    ) : (
-      <div class="space-y-4">
-        {projects.map((p) => (
-          <a href={`/projects/${p.id}`} class="card card-interactive block no-link-style">
-            <h2 class="h2 mb-1">{p.data.title}</h2>
-            <p class="prose-muted">{p.data.description}</p>
-          </a>
-        ))}
-      </div>
-    )}
+    <PageIntro
+      title="Projects"
+      description="Things I've built and contributed to."
+    />
+    <StackedCardLinks items={items} emptyMessage="No projects yet." />
   </div>
 </BaseLayout>

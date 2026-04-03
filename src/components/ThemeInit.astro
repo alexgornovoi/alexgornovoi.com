@@ -1,0 +1,37 @@
+---
+/* Inline theme + favicon swap; include once in document <head>. */
+---
+
+<link id="dynamic-favicon" rel="icon" type="image/svg+xml" href="/favicon-light.svg" />
+
+<script is:inline>
+  function applyTheme() {
+    const stored = localStorage.getItem("theme") || "system";
+    const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+    const html = document.documentElement;
+
+    html.classList.remove("dark");
+    html.removeAttribute("data-theme");
+
+    let effectiveTheme = stored;
+    if (stored === "system") {
+      effectiveTheme = prefersDark ? "dark" : "light";
+    }
+
+    if (effectiveTheme === "dark") {
+      html.classList.add("dark");
+    } else if (effectiveTheme !== "light") {
+      html.setAttribute("data-theme", effectiveTheme);
+    }
+
+    const link = document.getElementById("dynamic-favicon");
+    if (link) {
+      const lightThemes = ["light", "lavender", "sepia"];
+      const isDark = !lightThemes.includes(effectiveTheme);
+      link.href = isDark ? "/favicon-dark.svg" : "/favicon-light.svg";
+    }
+  }
+
+  applyTheme();
+  document.addEventListener("astro:after-swap", applyTheme);
+</script>

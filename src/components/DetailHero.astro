@@ -1,0 +1,27 @@
+---
+interface Props {
+  title: string;
+  subtitle?: string;
+  meta?: string;
+}
+
+const { title, subtitle, meta } = Astro.props;
+---
+
+<header class="mb-8">
+  <div class="flex items-center gap-4">
+    <div
+      class="w-14 h-14 rounded-lg flex items-center justify-center flex-shrink-0"
+      style="background: var(--surface-2); color: var(--accent);"
+    >
+      <slot name="icon" />
+    </div>
+    <div class="min-w-0">
+      <h1 class="h1">{title}</h1>
+      {subtitle && (
+        <p class="prose-body" style="color: var(--text-muted);">{subtitle}</p>
+      )}
+    </div>
+  </div>
+  {meta && <p class="meta mt-3">{meta}</p>}
+</header>

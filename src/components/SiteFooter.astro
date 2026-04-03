@@ -1,0 +1,45 @@
+---
+import ThemeSelector from "./ThemeSelector.astro";
+import IconGithub from "./icons/IconGithub.astro";
+import IconLinkedIn from "./icons/IconLinkedIn.astro";
+import IconMail from "./icons/IconMail.astro";
+
+interface Props {
+  containerClass: string;
+  pyClass?: string;
+}
+
+const { containerClass, pyClass = "py-6" } = Astro.props;
+---
+
+<footer class="border-t" style="border-color: var(--border); background: var(--surface);">
+  <div class:list={[containerClass, pyClass]}>
+    <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p class="meta">© 2025 Alex Gornovoi</p>
+      <div class="flex items-center gap-6">
+        <a
+          href="https://github.com/alexgornovoi"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="no-link-style"
+          style="color: var(--text-faint);"
+        >
+          <IconGithub class="icon" />
+        </a>
+        <a
+          href="https://www.linkedin.com/in/alexeygornovoi/"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="no-link-style"
+          style="color: var(--text-faint);"
+        >
+          <IconLinkedIn class="icon" />
+        </a>
+        <a href="mailto:alex.gornovoi@gmail.com" class="no-link-style" style="color: var(--text-faint);">
+          <IconMail class="icon" />
+        </a>
+        <ThemeSelector />
+      </div>
+    </div>
+  </div>
+</footer>

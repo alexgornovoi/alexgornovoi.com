@@ -2,7 +2,6 @@
 title: How to create a blog in Astro
 id: how-to-create-a-blog-in-astro
 description: Learn how to create a blog with Astro’s Content Collections.
-tools: ["Astro", "Javascript", "Tailwindcss"]
 pubDate: 3/10/2025
 related:
   type: project
@@ -36,7 +35,6 @@ const blog = defineCollection({
     title: z.string(),
     id: z.string(),
     description: z.string(),
-    tools: z.array(z.string()),
     pubDate: z.coerce.date(),
     project: z.string().optional(),
   }),
@@ -56,7 +54,6 @@ After defining the config, we will now write a quick test blog. Our Markdown fil
 title: Test
 id: test
 description: This is a test blog
-tools: ["Markdown", "Astro"]
 pubDate: 3/10/2025
 ---
 
