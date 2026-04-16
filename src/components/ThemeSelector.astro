@@ -168,8 +168,7 @@ const customDarkThemes = themes.filter(t => !t.isDefault && t.mode === 'dark');
       // Update favicon
       const favicon = document.getElementById('dynamic-favicon') as HTMLLinkElement;
       if (favicon) {
-        const isDark = effectiveTheme !== 'light' && effectiveTheme !== 'lavender' && effectiveTheme !== 'sepia';
-        favicon.href = isDark ? '/favicon-dark.svg' : '/favicon-light.svg';
+        favicon.href = `/favicon-${effectiveTheme}.svg`;
       }
     }
     

@@ -26,12 +26,19 @@
 
     const link = document.getElementById("dynamic-favicon");
     if (link) {
-      const lightThemes = ["light", "lavender", "sepia"];
-      const isDark = !lightThemes.includes(effectiveTheme);
-      link.href = isDark ? "/favicon-dark.svg" : "/favicon-light.svg";
+      link.href = `/favicon-${effectiveTheme}.svg`;
     }
   }
 
   applyTheme();
+
+  document.addEventListener("astro:before-swap", (e) => {
+    const currentFavicon = document.getElementById("dynamic-favicon");
+    const newFavicon = e.newDocument.getElementById("dynamic-favicon");
+    if (currentFavicon && newFavicon) {
+      newFavicon.href = currentFavicon.href;
+    }
+  });
+
   document.addEventListener("astro:after-swap", applyTheme);
 </script>
