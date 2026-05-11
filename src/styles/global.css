@@ -418,25 +418,64 @@ html.dark .astro-code span {
   text-decoration-thickness: 1px;
 }
 
-.blog-content a:hover { 
+.blog-content a:hover {
   color: var(--link-hover);
 }
 
 .blog-content h2 {
   @apply mt-10 mb-4;
+  color: var(--text-strong);
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border);
 }
 
 .blog-content h3 {
   @apply mt-8 mb-3;
+  color: var(--text-strong);
 }
 
-.blog-content ul, .blog-content ol {
+.blog-content strong {
+  color: var(--text-strong);
+  font-weight: 600;
+}
+
+.blog-content ul {
   @apply pl-5 mb-6;
+  list-style: disc;
   color: var(--text);
+}
+
+.blog-content ul li::marker {
+  color: var(--accent);
+}
+
+.blog-content ol {
+  @apply pl-5 mb-6;
+  list-style: decimal;
+  color: var(--text);
+}
+
+.blog-content ol li::marker {
+  color: var(--accent);
+  font-weight: 600;
 }
 
 .blog-content li {
   @apply mb-2;
+}
+
+.blog-content blockquote {
+  border-left: 3px solid var(--accent);
+  padding: 0.75rem 1.25rem;
+  margin: 1.5rem 0;
+  background: var(--surface-2);
+  border-radius: 0 8px 8px 0;
+  color: var(--text-muted);
+  font-size: 0.9375rem;
+}
+
+.blog-content blockquote p {
+  margin-bottom: 0;
 }
 
 /* ===========================================

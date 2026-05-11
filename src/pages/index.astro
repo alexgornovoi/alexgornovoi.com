@@ -21,7 +21,7 @@ const featuredProjects = featuredProjectIds
 const posts = (await getCollection("blog")).sort(
   (a, b) => b.data.pubDate.getTime() - a.data.pubDate.getTime(),
 );
-const featuredPosts = posts.slice(0, 3);
+const featuredPosts = posts.slice(0, 1);
 ---
 
 <BaseLayout
@@ -32,6 +32,7 @@ const featuredPosts = posts.slice(0, 3);
   landing={true}
   verbatimTitle={true}
   footerPyClass="py-8"
+  noScroll={true}
 >
   <section class="container-wide pt-12 pb-8 sm:pt-16 sm:pb-10">
     <div class="animate-fade-up">
