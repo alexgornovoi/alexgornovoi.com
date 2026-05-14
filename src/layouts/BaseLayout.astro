@@ -1,6 +1,6 @@
 ---
 import "../styles/global.css";
-import { ViewTransitions } from "astro:transitions";
+import { ClientRouter } from "astro:transitions";
 import ThemeInit from "../components/ThemeInit.astro";
 import SiteFooter from "../components/SiteFooter.astro";
 
@@ -63,7 +63,7 @@ const mainClass = landing
     <ThemeInit />
     {description && <meta name="description" content={description} />}
     <title>{documentTitle}</title>
-    <ViewTransitions />
+    <ClientRouter />
     <slot name="head" />
   </head>
   <body class:list={["flex flex-col", noScroll ? "h-screen overflow-hidden" : "min-h-screen"]} style="background: var(--bg);">
